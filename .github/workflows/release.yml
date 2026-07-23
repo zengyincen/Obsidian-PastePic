@@ -1,0 +1,68 @@
+name: Release Obsidian plugin
+
+on:
+  push:
+    tags:
+      - "*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test and build
+        run: |
+          npm test
+          npm run build
+
+      - name: Validate release version
+        shell: bash
+        run: |
+          manifest_version="$(node -p "require('./manifest.json').version")"
+          if [[ "$GITHUB_REF_NAME" == v* ]]; then
+            echo "Release tags must not start with v: $GITHUB_REF_NAME" >&2
+            exit 1
+          fi
+          if [[ "$GITHUB_REF_NAME" != "$manifest_version" ]]; then
+            echo "Tag $GITHUB_REF_NAME does not match manifest $manifest_version" >&2
+            exit 1
+          fi
+
+      - name: Package plugin
+        shell: bash
+        run: |
+          archive="obsipastepic-${GITHUB_REF_NAME}.zip"
+          zip -j "$archive" main.js manifest.json styles.css
+          zip "$archive" assets/icon.svg
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          archive="obsipastepic-${GITHUB_REF_NAME}.zip"
+          gh release create "$GITHUB_REF_NAME" \
+            --verify-tag \
+            --title "$GITHUB_REF_NAME" \
+            --notes "Obsidian community-directory release $GITHUB_REF_NAME." \
+            main.js \
+            manifest.json \
+            styles.css \
+            assets/icon.svg \
+            assets/banner.svg \
+            assets/hero.svg \
+            "$archive"

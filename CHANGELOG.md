@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.4 — 2026-07-23
+
+- Publish a fresh release under the exact bare version tag required by the Obsidian community directory.
+- Add a release workflow that rejects `v`-prefixed or mismatched tags and uploads the required plugin assets automatically.
+
 ## 0.4.3 — 2026-07-23
 
 - Change the manifest display name to **PastePic** to comply with the Obsidian community-directory rule that prohibits variations such as `Obsi-`.
