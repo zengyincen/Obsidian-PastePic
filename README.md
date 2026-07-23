@@ -183,22 +183,18 @@ npm run build       # 生成 main.js
 
 ObsiPastePic 是独立实现的 MIT 开源项目。以下项目为事件处理、上传抽象、GitHub 图床与用户体验提供了重要参考：
 
-### 直接参考
 
 - [gavvvr/obsidian-imgur-plugin](https://github.com/gavvvr/obsidian-imgur-plugin) — 图片粘贴事件、上传器抽象与失败回退思路。
 - [yaleiyale/obsidian-emo-uploader](https://github.com/yaleiyale/obsidian-emo-uploader) — GitHub Contents API、多图床配置与 CDN 链接组织方式。
 - [renmu123/obsidian-image-auto-upload-plugin](https://github.com/renmu123/obsidian-image-auto-upload-plugin) — 粘贴占位、拖放上传与图床工作流。
-
-其中，`obsidian-image-auto-upload-plugin` 是 `obsidian-imgur-plugin` 的 fork；感谢两边作者持续演进这条插件路线。
-
-### 参考项目所致谢的上游与生态
-
 - [jordanhandy/obsidian-cloudinary-uploader](https://github.com/jordanhandy/obsidian-cloudinary-uploader) — 被 Emo Uploader 明确列为 Cloudinary 实现资料。
 - [PicGo](https://github.com/Molunerfinn/PicGo) 与 [PicGo-Core](https://github.com/PicGo/PicGo-Core) — Image Auto Upload Plugin 的核心图床生态与文档来源。
 - [GitHub REST API](https://docs.github.com/rest) 与 [jsDelivr](https://www.jsdelivr.com/) — Emo Uploader 致谢并采用的上传/CDN 基础设施。
 - [AList](https://github.com/AlistGo/alist)、[EasyImages2.0](https://github.com/icret/EasyImages2.0)、[Chevereto](https://github.com/chevereto/chevereto) — Emo Uploader 支持并在文档中致谢的自托管图床生态。
 - [Cloudinary](https://cloudinary.com/)、[SM.MS](https://smms.app/)、[ImgURL](https://www.imgurl.org/)、[Imgur](https://imgur.com/)、[imgbb](https://imgbb.com/) 与 [Catbox](https://catbox.moe/) — 上述参考项目覆盖和记录的托管服务。
 - 感谢 Emo Uploader 文档中点名的贡献者 [anxinJ](https://github.com/anxinJ) 与 [Linnnkkk](https://github.com/Linnnkkk)。
+
+其中，`obsidian-image-auto-upload-plugin` 是 `obsidian-imgur-plugin` 的 fork；感谢两边作者持续演进这条插件路线。
 
 感谢 [Obsidian](https://obsidian.md/) 提供插件 API，也感谢所有维护者公开代码与文档。
 
