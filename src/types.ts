@@ -11,8 +11,6 @@ export interface GitHubSettings {
   commitMessage: string;
   filenameStrategy: "timestamp" | "timestamp-original" | "original";
   cdnBaseUrl: string;
-  /** @deprecated Kept only so pre-0.2.0 settings can be migrated. */
-  cdnTemplate?: string;
 }
 
 export interface CustomApiSettings {
@@ -22,8 +20,6 @@ export interface CustomApiSettings {
   extraFieldsJson: string;
   responseUrlPath: string;
   cdnBaseUrl: string;
-  /** @deprecated Kept only so pre-0.2.0 settings can be migrated. */
-  cdnTemplate?: string;
 }
 
 export interface ObsiPastePicSettings {

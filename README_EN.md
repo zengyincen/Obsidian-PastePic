@@ -61,17 +61,17 @@ ObsiPastePic does one thing well: **it catches an image that is pasted, dropped,
 ### Install from a Release
 
 1. Open the [latest Release](https://github.com/zengyincen/Obsidian-PastePic/releases/latest).
-2. Download `obsipastepic-*.zip`.
-3. Extract it to:
+2. Download `main.js`, `manifest.json`, and `styles.css`.
+3. Create the plugin directory in your vault:
 
    ```text
    <your-vault>/.obsidian/plugins/obsipastepic/
    ```
 
-4. Make sure the folder contains `main.js`, `manifest.json`, `styles.css`, and `assets/icon.svg`.
+4. Put the three downloaded files in that directory. The color icon is bundled into `main.js`, so no additional asset file is required.
 5. Restart Obsidian and enable **PastePic** under Settings → Community plugins.
 
-> ObsiPastePic has not yet been submitted to the official Obsidian community-plugin directory. GitHub Releases are currently the canonical distribution channel.
+> ObsiPastePic is currently going through the official Obsidian community-directory review. If it is not searchable there yet, install it from GitHub Releases.
 
 > The community-directory display name is **PastePic**. The project brand and plugin ID remain **ObsiPastePic** / `obsipastepic` to preserve existing installations and settings.
 

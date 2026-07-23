@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.5 — 2026-07-23
+
+- Adopt Obsidian 1.13's declarative settings API and searchable setting definitions.
+- Use standard setting headings and correct paste/drop event handling.
+- Bundle the settings icon into `main.js` and limit GitHub Release assets to supported plugin files.
+- Add GitHub build-provenance attestations for published assets.
+- Remove the deprecated `builtin-modules` dependency and clean up legacy settings migration types.
+- Add an English overview to the default Chinese README.
+
 ## 0.4.4 — 2026-07-23
 
 - Publish a fresh release under the exact bare version tag required by the Obsidian community directory.

@@ -12,8 +12,13 @@
   box-shadow: 0 8px 22px rgb(10 132 255 / 22%);
 }
 
-.obsipastepic-settings-header h1 {
-  margin: 0;
+.obsipastepic-settings-header .setting-item-info {
+  flex: 1;
+}
+
+.obsipastepic-settings-header .setting-item-name {
+  font-size: var(--font-ui-large);
+  font-weight: var(--font-semibold);
 }
 
 .obsipastepic-preview {

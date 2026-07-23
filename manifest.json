@@ -1,8 +1,8 @@
 {
   "id": "obsipastepic",
   "name": "PastePic",
-  "version": "0.4.4",
-  "minAppVersion": "1.4.0",
+  "version": "0.4.5",
+  "minAppVersion": "1.13.0",
   "description": "Paste images, upload to GitHub or your image host, and insert customizable CDN links.",
   "author": "曾胤岑",
   "authorUrl": "https://github.com/zengyincen",

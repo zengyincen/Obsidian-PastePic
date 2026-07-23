@@ -6,7 +6,9 @@ on:
       - "*"
 
 permissions:
+  attestations: write
   contents: write
+  id-token: write
 
 jobs:
   release:
@@ -42,27 +44,23 @@ jobs:
             exit 1
           fi
 
-      - name: Package plugin
-        shell: bash
-        run: |
-          archive="obsipastepic-${GITHUB_REF_NAME}.zip"
-          zip -j "$archive" main.js manifest.json styles.css
-          zip "$archive" assets/icon.svg
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v3
+        with:
+          subject-path: |
+            main.js
+            manifest.json
+            styles.css
 
       - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
-          archive="obsipastepic-${GITHUB_REF_NAME}.zip"
           gh release create "$GITHUB_REF_NAME" \
             --verify-tag \
             --title "$GITHUB_REF_NAME" \
             --notes "Obsidian community-directory release $GITHUB_REF_NAME." \
             main.js \
             manifest.json \
-            styles.css \
-            assets/icon.svg \
-            assets/banner.svg \
-            assets/hero.svg \
-            "$archive"
+            styles.css

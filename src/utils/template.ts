@@ -58,7 +58,7 @@ export function filenameExtension(filename: string, mimeType: string): string {
 export function sanitizeFilename(filename: string): string {
   const sanitized = filename
     .normalize("NFKC")
-    .replace(/[\\/:*?"<>|#%{}\[\]]/g, "-")
+    .replace(/[\\/:*?"<>|#%{}\u005B\u005D]/g, "-")
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-")
     .replace(/^[-.]+|[-.]+$/g, "");

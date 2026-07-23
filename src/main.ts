@@ -39,20 +39,30 @@ export default class ObsiPastePicPlugin extends Plugin {
 
     this.registerEvent(
       this.app.workspace.on("editor-paste", (event, editor, info) => {
+        if (event.defaultPrevented) return;
         if (!this.settings.autoUpload) return;
         const clipboard = event.clipboardData;
         if (!clipboard) return;
         if (!this.settings.uploadWhenClipboardHasText && clipboard.getData("text/plain").trim()) {
           return;
         }
-        this.handleFiles(Array.from(clipboard.files), event, editor, info.file?.path ?? "");
+        if (this.handleFiles(Array.from(clipboard.files), editor, info.file?.path ?? "")) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+        }
       }),
     );
 
     this.registerEvent(
       this.app.workspace.on("editor-drop", (event, editor, info) => {
+        if (event.defaultPrevented) return;
         if (!this.settings.uploadOnDrop || !event.dataTransfer) return;
-        this.handleFiles(Array.from(event.dataTransfer.files), event, editor, info.file?.path ?? "");
+        if (this.handleFiles(Array.from(event.dataTransfer.files), editor, info.file?.path ?? "")) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+        }
       }),
     );
 
@@ -92,27 +102,24 @@ export default class ObsiPastePicPlugin extends Plugin {
 
   private handleFiles(
     files: File[],
-    event: ClipboardEvent | DragEvent,
     editor: Editor,
     sourcePath: string,
-  ): void {
-    if (files.length === 0) return;
-    if (!files.every((file) => this.isSupportedImage(file))) return;
+  ): boolean {
+    if (files.length === 0) return false;
+    if (!files.every((file) => this.isSupportedImage(file))) return false;
 
     let uploader: ImageUploader;
     try {
       uploader = createUploader(this.settings);
     } catch (error) {
       new Notice(`${this.errorMessage(error)}；已保留 Obsidian 原生粘贴行为`);
-      return;
+      return false;
     }
 
-    event.preventDefault();
-    event.stopPropagation();
-    event.stopImmediatePropagation();
     const pending = files.map((file) => this.createPendingUpload(file, sourcePath));
     editor.replaceSelection(pending.map(({ placeholder }) => placeholder).join("\n"));
     void this.uploadAll(pending, uploader, editor);
+    return true;
   }
 
   private async uploadAll(

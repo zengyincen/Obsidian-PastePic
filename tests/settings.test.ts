@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { DEFAULT_SETTINGS, mergeSettings } from "../src/settings";
+import type { ObsiPastePicSettings } from "../src/types";
 
 describe("settings migration", () => {
   it("defaults to Simplified Chinese and an empty repository path", () => {
@@ -33,7 +34,7 @@ describe("settings migration", () => {
   });
 
   it("drops legacy brace-based CDN templates", () => {
-    const merged = mergeSettings({
+    const legacySettings = {
       github: {
         ...DEFAULT_SETTINGS.github,
         cdnBaseUrl: "",
@@ -44,10 +45,11 @@ describe("settings migration", () => {
         cdnBaseUrl: "",
         cdnTemplate: "{url}",
       },
-    });
+    } as unknown as Partial<ObsiPastePicSettings>;
+    const merged = mergeSettings(legacySettings);
     expect(merged.github.cdnBaseUrl).toBe("");
-    expect(merged.github.cdnTemplate).toBeUndefined();
+    expect("cdnTemplate" in merged.github).toBe(false);
     expect(merged.custom.cdnBaseUrl).toBe("");
-    expect(merged.custom.cdnTemplate).toBeUndefined();
+    expect("cdnTemplate" in merged.custom).toBe(false);
   });
 });

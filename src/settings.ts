@@ -32,25 +32,28 @@ export const DEFAULT_SETTINGS: ObsiPastePicSettings = {
 export function mergeSettings(
   saved: Partial<ObsiPastePicSettings> | null | undefined,
 ): ObsiPastePicSettings {
+  type LegacyCdnSettings = { cdnTemplate?: string };
+  const { cdnTemplate: legacyGitHubCdn, ...savedGitHub } = (saved?.github ?? {}) as
+    Partial<ObsiPastePicSettings["github"]> & LegacyCdnSettings;
+  const { cdnTemplate: legacyCustomCdn, ...savedCustom } = (saved?.custom ?? {}) as
+    Partial<ObsiPastePicSettings["custom"]> & LegacyCdnSettings;
   const github = {
     ...DEFAULT_SETTINGS.github,
-    ...saved?.github,
+    ...savedGitHub,
   };
   const custom = {
     ...DEFAULT_SETTINGS.custom,
-    ...saved?.custom,
+    ...savedCustom,
   };
 
   // Old releases stored brace-based templates. They cannot be mapped safely
   // to a directory URL, so an empty base falls back to GitHub Raw/the API URL.
-  if (!github.cdnBaseUrl && github.cdnTemplate && !github.cdnTemplate.includes("{")) {
-    github.cdnBaseUrl = github.cdnTemplate;
+  if (!github.cdnBaseUrl && legacyGitHubCdn && !legacyGitHubCdn.includes("{")) {
+    github.cdnBaseUrl = legacyGitHubCdn;
   }
-  if (!custom.cdnBaseUrl && custom.cdnTemplate && !custom.cdnTemplate.includes("{")) {
-    custom.cdnBaseUrl = custom.cdnTemplate;
+  if (!custom.cdnBaseUrl && legacyCustomCdn && !legacyCustomCdn.includes("{")) {
+    custom.cdnBaseUrl = legacyCustomCdn;
   }
-  delete github.cdnTemplate;
-  delete custom.cdnTemplate;
 
   return {
     ...DEFAULT_SETTINGS,
