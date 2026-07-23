@@ -1,13 +1,5 @@
-<p align="right">
-  <a href="./README_ZH.md">简体中文</a> · <strong>English</strong>
-</p>
-
 <p align="center">
   <img src="./assets/icon.svg" alt="ObsiPastePic App Icon" width="128" height="128" />
-</p>
-
-<p align="center">
-  <img src="./assets/banner.svg" alt="ObsiPastePic Banner" width="100%" />
 </p>
 
 <p align="center">
@@ -30,15 +22,23 @@
   <a href="#github-setup-in-30-seconds"><strong>Quick start</strong></a>
   ·
   <a href="#cdn--proxy-base-directory"><strong>CDN path</strong></a>
+  ·
+  <a href="./README_ZH.md">简体中文</a>
+  ·
+  <strong>English</strong>
 </p>
 
 <p align="center">
-  <img src="./assets/hero.svg" alt="ObsiPastePic — Paste. Upload. Done." width="100%" />
+  <img src="./assets/banner.svg" alt="ObsiPastePic Banner" width="100%" />
 </p>
 
 ## Why ObsiPastePic?
 
 Screenshots, web images, and design exports can make an Obsidian vault grow quickly. Manually opening an image host, uploading, copying a URL, and returning to the note also breaks the writing flow.
+
+<p align="center">
+  <img src="./assets/hero.svg" alt="ObsiPastePic — Paste. Upload. Done." width="100%" />
+</p>
 
 ObsiPastePic does one thing well: **it catches an image that is pasted, dropped, or newly inserted as a local Obsidian link, uploads it, and puts the remote Markdown image link back in the same place.** Every upload gets a unique placeholder. A failed upload restores the local image link instead of leaving a broken error link.
 
