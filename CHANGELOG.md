@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.7 — 2026-07-23
+
+- Replace runtime `btoa` usage with an explicit RFC 4648 byte encoder required by the GitHub Contents API.
+- Add binary encoding test vectors so image uploads remain verifiable without hidden runtime decoding behavior.
+
 ## 0.4.6 — 2026-07-23
 
 - Make the complete English documentation the default `README.md` for the Obsidian community directory.
