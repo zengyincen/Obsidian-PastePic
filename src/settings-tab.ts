@@ -1,6 +1,5 @@
 import { App, Notice, PluginSettingTab, Setting, requestUrl } from "obsidian";
 import type ImageBedUploaderPlugin from "./main";
-import { DEFAULT_CDN_TEMPLATE } from "./settings";
 import { githubHeaders, buildGitHubPublicUrl, validateGitHubSettings } from "./uploaders/github";
 import { validateCustomApiSettings } from "./uploaders/custom-api";
 
@@ -25,13 +24,25 @@ export class ImageBedUploaderSettingTab extends PluginSettingTab {
       );
 
     new Setting(containerEl)
-      .setName("拖放图片时上传")
-      .setDesc("把图片拖进 Markdown 编辑器时也自动上传。")
+      .setName("拖入图片时自动上传")
+      .setDesc("把图片文件拖进 Markdown 编辑器时直接上传，不先保存为本地附件。")
       .addToggle((toggle) =>
         toggle.setValue(this.plugin.settings.uploadOnDrop).onChange(async (value) => {
           this.plugin.settings.uploadOnDrop = value;
           await this.plugin.saveSettings();
         }),
+      );
+
+    new Setting(containerEl)
+      .setName("插入本地图片时自动上传")
+      .setDesc("检测 Obsidian 或其他插件新插入的本地图片链接，上传后自动替换为远程链接。")
+      .addToggle((toggle) =>
+        toggle
+          .setValue(this.plugin.settings.uploadInsertedLocalImages)
+          .onChange(async (value) => {
+            this.plugin.settings.uploadInsertedLocalImages = value;
+            await this.plugin.saveSettings();
+          }),
       );
 
     new Setting(containerEl)
@@ -117,7 +128,6 @@ export class ImageBedUploaderSettingTab extends PluginSettingTab {
       .setName("GitHub Token")
       .setDesc("Fine-grained PAT 需授予目标仓库 Contents: Read and write。Token 会保存在插件 data.json 中。")
       .addText((text) => {
-        text.inputEl.type = "password";
         text
           .setPlaceholder("github_pat_…")
           .setValue(settings.token)
@@ -134,10 +144,10 @@ export class ImageBedUploaderSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName("仓库内路径")
-      .setDesc("支持 {year}、{month}、{day}、{hour}、{minute}、{second}、{timestamp}。可留空。")
+      .setDesc("图片在仓库中的目录。建议使用固定目录（如 images）；自定义 CDN 基础路径必须指向这个目录。")
       .addText((text) =>
         text
-          .setPlaceholder("images/{year}/{month}")
+          .setPlaceholder("images")
           .setValue(settings.uploadPath)
           .onChange(async (value) => {
             settings.uploadPath = value;
@@ -176,29 +186,28 @@ export class ImageBedUploaderSettingTab extends PluginSettingTab {
     const preview = containerEl.createDiv({ cls: "image-bed-uploader-preview" });
     const updatePreview = (): void => {
       preview.setText(
-        buildGitHubPublicUrl(settings, "images/2026/07/example image.png"),
+        buildGitHubPublicUrl(settings, "images/example image.png"),
       );
     };
 
     new Setting(containerEl)
-      .setName("CDN 链接模板")
+      .setName("CDN / 代理基础路径")
       .setDesc(
-        "上传后写入笔记的链接。支持 {owner}、{repo}、{branch}、{path}、{encodedPath}、{rawUrl}、{encodedRawUrl}。",
+        "填写到图片所在目录，例如 https://cdn.example.com/xx/xx/。插件会自动追加上传后的图片名和后缀；留空则自动使用 GitHub Raw。",
       )
-      .addTextArea((text) => {
-        text.inputEl.rows = 3;
+      .addText((text) => {
         text
-          .setPlaceholder(DEFAULT_CDN_TEMPLATE)
-          .setValue(settings.cdnTemplate)
+          .setPlaceholder("https://cdn.example.com/xx/xx/")
+          .setValue(settings.cdnBaseUrl)
           .onChange(async (value) => {
-            settings.cdnTemplate = value;
+            settings.cdnBaseUrl = value.trim();
             updatePreview();
             await this.plugin.saveSettings();
           });
       })
       .addButton((button) =>
-        button.setButtonText("恢复 Raw").onClick(async () => {
-          settings.cdnTemplate = DEFAULT_CDN_TEMPLATE;
+        button.setButtonText("使用 Raw").onClick(async () => {
+          settings.cdnBaseUrl = "";
           await this.plugin.saveSettings();
           this.display();
         }),
@@ -206,7 +215,7 @@ export class ImageBedUploaderSettingTab extends PluginSettingTab {
 
     updatePreview();
     containerEl.createEl("p", {
-      text: "示例：jsDelivr 可填 https://cdn.jsdelivr.net/gh/{owner}/{repo}@{branch}/{path}；代理整条 Raw URL 可填 https://你的代理/{rawUrl}。",
+      text: "示例：仓库目录是 images 时，可填 https://cdn.jsdelivr.net/gh/octocat/image-bed@main/images/；最终链接会自动变成 …/上传后的图片名.png。",
     });
 
     new Setting(containerEl)
@@ -295,14 +304,16 @@ export class ImageBedUploaderSettingTab extends PluginSettingTab {
       );
 
     new Setting(containerEl)
-      .setName("CDN / 代理链接模板")
-      .setDesc("支持 {url}、{encodedUrl}、{filename}；仅使用图床返回地址时填 {url}。")
-      .addTextArea((text) => {
-        text.inputEl.rows = 3;
-        text.setValue(settings.cdnTemplate).onChange(async (value) => {
-          settings.cdnTemplate = value;
-          await this.plugin.saveSettings();
-        });
+      .setName("CDN / 代理基础路径")
+      .setDesc("选填。填写到图片目录，插件会自动追加图床返回的图片名和后缀；留空使用图床原始链接。")
+      .addText((text) => {
+        text
+          .setPlaceholder("https://cdn.example.com/xx/xx/")
+          .setValue(settings.cdnBaseUrl)
+          .onChange(async (value) => {
+            settings.cdnBaseUrl = value.trim();
+            await this.plugin.saveSettings();
+          });
       });
 
     new Setting(containerEl)

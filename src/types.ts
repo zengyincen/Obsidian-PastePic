@@ -8,7 +8,9 @@ export interface GitHubSettings {
   uploadPath: string;
   commitMessage: string;
   filenameStrategy: "timestamp" | "timestamp-original" | "original";
-  cdnTemplate: string;
+  cdnBaseUrl: string;
+  /** @deprecated Kept only so pre-0.2.0 settings can be migrated. */
+  cdnTemplate?: string;
 }
 
 export interface CustomApiSettings {
@@ -17,13 +19,16 @@ export interface CustomApiSettings {
   headersJson: string;
   extraFieldsJson: string;
   responseUrlPath: string;
-  cdnTemplate: string;
+  cdnBaseUrl: string;
+  /** @deprecated Kept only so pre-0.2.0 settings can be migrated. */
+  cdnTemplate?: string;
 }
 
 export interface ImageBedUploaderSettings {
   provider: UploadProvider;
   autoUpload: boolean;
   uploadOnDrop: boolean;
+  uploadInsertedLocalImages: boolean;
   uploadWhenClipboardHasText: boolean;
   imageExtensions: string;
   github: GitHubSettings;

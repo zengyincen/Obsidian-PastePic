@@ -3,6 +3,7 @@ import type { GitHubSettings, ImageUploader, UploadResult } from "../types";
 import { arrayBufferToBase64 } from "../utils/base64";
 import {
   applyTemplate,
+  appendToUrlDirectory,
   createRemoteFilename,
   encodePath,
   formatDateVariables,
@@ -16,7 +17,6 @@ export function validateGitHubSettings(settings: GitHubSettings): void {
   if (!settings.repo.trim()) throw new Error("请填写 GitHub 仓库名");
   if (!settings.branch.trim()) throw new Error("请填写 GitHub 分支名");
   if (!settings.token.trim()) throw new Error("请填写 GitHub Token");
-  if (!settings.cdnTemplate.trim()) throw new Error("请填写 CDN 链接模板");
 }
 
 export function githubHeaders(token: string): Record<string, string> {
@@ -35,17 +35,12 @@ export function buildGitHubPublicUrl(
   const owner = encodeURIComponent(settings.owner.trim());
   const repo = encodeURIComponent(settings.repo.trim());
   const branch = encodeURIComponent(settings.branch.trim());
-  const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
+  const filename = remotePath.split("/").filter(Boolean).pop() ?? remotePath;
 
-  return applyTemplate(settings.cdnTemplate.trim(), {
-    owner,
-    repo,
-    branch,
-    path,
-    encodedPath: encodeURIComponent(remotePath),
-    rawUrl,
-    encodedRawUrl: encodeURIComponent(rawUrl),
-  });
+  if (settings.cdnBaseUrl.trim()) {
+    return appendToUrlDirectory(settings.cdnBaseUrl, filename);
+  }
+  return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
 }
 
 export class GitHubUploader implements ImageUploader {

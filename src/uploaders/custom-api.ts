@@ -2,14 +2,13 @@ import { requestUrl } from "obsidian";
 import type { CustomApiSettings, ImageUploader, UploadResult } from "../types";
 import { getJsonPath, parseObjectJson } from "../utils/json";
 import { createMultipartBody } from "../utils/multipart";
-import { applyTemplate } from "../utils/template";
+import { appendToUrlDirectory, filenameFromPath } from "../utils/template";
 
 export function validateCustomApiSettings(settings: CustomApiSettings): void {
   if (!settings.endpoint.trim()) throw new Error("请填写图床上传接口地址");
   if (!settings.fileField.trim()) throw new Error("请填写文件字段名");
   parseObjectJson(settings.headersJson, "请求头");
   parseObjectJson(settings.extraFieldsJson, "附加表单字段");
-  if (!settings.cdnTemplate.trim()) throw new Error("请填写返回链接模板");
 }
 
 export class CustomApiUploader implements ImageUploader {
@@ -50,12 +49,11 @@ export class CustomApiUploader implements ImageUploader {
     }
 
     const originalUrl = extracted.trim();
+    const remoteFilename = filenameFromPath(originalUrl) || file.name;
     return {
-      url: applyTemplate(this.settings.cdnTemplate.trim(), {
-        url: originalUrl,
-        encodedUrl: encodeURIComponent(originalUrl),
-        filename: encodeURIComponent(file.name),
-      }),
+      url: this.settings.cdnBaseUrl.trim()
+        ? appendToUrlDirectory(this.settings.cdnBaseUrl, remoteFilename)
+        : originalUrl,
     };
   }
 }

@@ -23,6 +23,21 @@ export function joinPath(...parts: string[]): string {
     .join("/");
 }
 
+export function appendToUrlDirectory(baseUrl: string, filename: string): string {
+  const normalizedBase = `${baseUrl.trim().replace(/\/+$/, "")}/`;
+  return `${normalizedBase}${encodeURIComponent(filename)}`;
+}
+
+export function filenameFromPath(path: string): string {
+  const cleanPath = path.split(/[?#]/, 1)[0];
+  const lastSegment = cleanPath.split("/").filter(Boolean).pop() ?? "";
+  try {
+    return decodeURIComponent(lastSegment);
+  } catch {
+    return lastSegment;
+  }
+}
+
 export function filenameExtension(filename: string, mimeType: string): string {
   const match = filename.toLowerCase().match(/\.([a-z0-9]+)$/);
   if (match) return `.${match[1]}`;
@@ -83,4 +98,8 @@ export function createRemoteFilename(
 
 export function escapeMarkdownAlt(value: string): string {
   return value.replace(/[\]\\]/g, "\\$&").replace(/[\r\n]+/g, " ");
+}
+
+export function createMarkdownImage(alt: string, url: string): string {
+  return `![${escapeMarkdownAlt(alt)}](${url})`;
 }

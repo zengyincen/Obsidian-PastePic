@@ -14,4 +14,23 @@ describe("settings migration", () => {
     merged.github.owner = "changed";
     expect(DEFAULT_SETTINGS.github.owner).toBe("");
   });
+
+  it("drops legacy brace-based CDN templates", () => {
+    const merged = mergeSettings({
+      github: {
+        ...DEFAULT_SETTINGS.github,
+        cdnBaseUrl: "",
+        cdnTemplate: "https://cdn.example.com/{path}",
+      },
+      custom: {
+        ...DEFAULT_SETTINGS.custom,
+        cdnBaseUrl: "",
+        cdnTemplate: "{url}",
+      },
+    });
+    expect(merged.github.cdnBaseUrl).toBe("");
+    expect(merged.github.cdnTemplate).toBeUndefined();
+    expect(merged.custom.cdnBaseUrl).toBe("");
+    expect(merged.custom.cdnTemplate).toBeUndefined();
+  });
 });

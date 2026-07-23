@@ -1,9 +1,12 @@
 import { describe, expect, it } from "vitest";
 import {
   applyTemplate,
+  appendToUrlDirectory,
+  createMarkdownImage,
   createRemoteFilename,
   encodePath,
   formatDateVariables,
+  filenameFromPath,
   joinPath,
   sanitizeFilename,
 } from "../src/utils/template";
@@ -20,6 +23,21 @@ describe("template helpers", () => {
 
   it("joins paths without duplicate separators", () => {
     expect(joinPath("/images/", "/2026/", "a.png")).toBe("images/2026/a.png");
+  });
+
+  it("appends only an encoded filename to a CDN directory", () => {
+    expect(appendToUrlDirectory("https://cdn.example.com/a/b/", "hello world.png"))
+      .toBe("https://cdn.example.com/a/b/hello%20world.png");
+  });
+
+  it("extracts a decoded filename from a remote URL", () => {
+    expect(filenameFromPath("https://img.example.com/a/hello%20world.png?x=1"))
+      .toBe("hello world.png");
+  });
+
+  it("creates image Markdown without angle brackets around the URL", () => {
+    expect(createMarkdownImage("image.png", "https://cdn.example.com/image.png"))
+      .toBe("![image.png](https://cdn.example.com/image.png)");
   });
 
   it("sanitizes characters that are unsafe in file names", () => {

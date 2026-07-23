@@ -25,7 +25,7 @@
   ·
   <a href="#github-setup-in-30-seconds"><strong>Quick start</strong></a>
   ·
-  <a href="#cdn--proxy-url-templates"><strong>CDN templates</strong></a>
+  <a href="#cdn--proxy-base-directory"><strong>CDN path</strong></a>
 </p>
 
 <p align="center">
@@ -36,7 +36,7 @@
 
 Screenshots, web images, and design exports can make an Obsidian vault grow quickly. Manually opening an image host, uploading, copying a URL, and returning to the note also breaks the writing flow.
 
-ObsiPastePic does one thing well: **it catches a pasted or dropped image, uploads it, and puts the remote Markdown image link back in the same place.** Every upload gets a unique placeholder. Failures remain visible instead of silently removing content.
+ObsiPastePic does one thing well: **it catches an image that is pasted, dropped, or newly inserted as a local Obsidian link, uploads it, and puts the remote Markdown image link back in the same place.** Every upload gets a unique placeholder. A failed upload restores the local image link instead of leaving a broken error link.
 
 ## Features
 
@@ -44,9 +44,10 @@ ObsiPastePic does one thing well: **it catches a pasted or dropped image, upload
 | --- | --- |
 | Automatic paste upload | Paste multiple images and replace each independent placeholder asynchronously |
 | Drag-and-drop upload | Optionally upload images dropped into the Markdown editor |
+| Inserted-image detection | Upload local image links newly inserted by Obsidian or another plugin |
 | GitHub image hosting | GitHub Contents API with branches, date paths, and commit-message templates |
 | Generic image-host API | `POST multipart/form-data` with custom headers, file field, and extra form fields |
-| CDN / proxy acceleration | A full URL template instead of a limited list of CDN presets |
+| CDN / proxy acceleration | Enter an image-directory base URL; the plugin appends the filename and extension |
 | Native fallback | Leaves Obsidian untouched when there is no image, mixed file types, or missing configuration |
 | Desktop and mobile | No local executable dependency and no desktop-only manifest restriction |
 
@@ -55,7 +56,7 @@ ObsiPastePic does one thing well: **it catches a pasted or dropped image, upload
 ### Install from a Release
 
 1. Open the [latest Release](https://github.com/zengyincen/obsidian-image-bed-uploader/releases/latest).
-2. Download `image-bed-uploader-*.zip`.
+2. Download `obsipastepic-*.zip`.
 3. Extract it to:
 
    ```text
@@ -93,10 +94,10 @@ npm run build
 The default repository path is:
 
 ```text
-images/{year}/{month}
+images
 ```
 
-Available date variables: `{year}`, `{month}`, `{day}`, `{hour}`, `{minute}`, `{second}`, and `{timestamp}`.
+Use a fixed directory so the CDN base URL can point to the same location reliably.
 
 Filename strategies:
 
@@ -106,19 +107,20 @@ Filename strategies:
 
 Commit messages can also use `{filename}` and `{path}`.
 
-## CDN / proxy URL templates
+## CDN / proxy base directory
 
-GitHub mode supports `{owner}`, `{repo}`, `{branch}`, `{path}`, `{encodedPath}`, `{rawUrl}`, and `{encodedRawUrl}`.
+There are no template variables. Enter the URL of the **final image directory** and ObsiPastePic appends the uploaded filename and extension automatically.
 
-| Use case | Template |
-| --- | --- |
-| GitHub Raw — default | `https://raw.githubusercontent.com/{owner}/{repo}/{branch}/{path}` |
-| jsDelivr | `https://cdn.jsdelivr.net/gh/{owner}/{repo}@{branch}/{path}` |
-| Statically | `https://cdn.statically.io/gh/{owner}/{repo}/{branch}/{path}` |
-| Raw URL prefix proxy | `https://image-proxy.example.com/{rawUrl}` |
-| Query-parameter proxy | `https://image-proxy.example.com/fetch?url={encodedRawUrl}` |
+For a repository directory named `images` and an uploaded filename `1730000000-note.png`:
 
-The settings screen shows a live preview, so the template can match any self-hosted proxy route.
+| Use case | Base directory in settings | Final URL |
+| --- | --- | --- |
+| GitHub Raw | Leave empty | A complete Raw URL is generated automatically |
+| jsDelivr | `https://cdn.jsdelivr.net/gh/zengyincen/image-bed@main/images/` | `…/images/1730000000-note.png` |
+| Statically | `https://cdn.statically.io/gh/zengyincen/image-bed/main/images/` | `…/images/1730000000-note.png` |
+| Custom proxy/CDN | `https://cdn.example.com/xx/xx/` | `https://cdn.example.com/xx/xx/1730000000-note.png` |
+
+The settings screen displays the complete URL preview. A custom base must point to the same directory as “Repository path.”
 
 > Raw and public CDN links generally cannot read private GitHub repositories anonymously. Uploads may succeed while images remain unavailable. Use an authenticated proxy or a public image repository.
 
@@ -141,7 +143,7 @@ album=obsidian
 | Header JSON | `{"Authorization":"Bearer token"}` |
 | Extra field JSON | `{"album":"obsidian"}` |
 | Response URL path | `data.url` or `data.images[0].url` |
-| CDN template | `{url}` or `https://proxy.example.com/?url={encodedUrl}` |
+| CDN / proxy base directory | `https://cdn.example.com/xx/xx/`; leave empty to use the host response URL |
 
 Services that require custom signatures, chunked uploads, or an interactive browser login need a dedicated uploader implementation.
 
@@ -150,8 +152,9 @@ Services that require custom signatures, chunked uploads, or an interactive brow
 - The plugin does nothing when the clipboard contains no image.
 - It does not intercept a mixed list of image and non-image files.
 - Missing configuration preserves Obsidian's native paste behavior.
-- Uploads start with a unique placeholder and finish as `![filename](<remote-url>)`.
-- Failed uploads become HTML comments and trigger a notice, making retry and diagnosis straightforward.
+- Uploads start with a unique placeholder and finish as standard `![filename](remote-url)` Markdown, without `< >` around the URL.
+- Failed uploads restore the local image link instead of creating `[Github upload error]()` or an HTML error comment.
+- Existing legacy `[Github upload error]()` markers are removed automatically on editor changes.
 - A setting controls whether images are uploaded when clipboard text is present too.
 
 ## Security
@@ -168,7 +171,7 @@ npm test            # Vitest unit tests
 npm run build       # Build main.js
 ```
 
-Tests currently cover template substitution, path encoding, file naming, JSON response paths, and settings migration.
+Tests cover base-directory joining, angle-bracket-free Markdown, path encoding, file naming, local image insertion detection, legacy error-marker cleanup, JSON response paths, and settings migration.
 
 ## Brand assets
 

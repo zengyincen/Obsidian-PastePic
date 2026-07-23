@@ -1,12 +1,10 @@
 import type { ImageBedUploaderSettings } from "./types";
 
-export const DEFAULT_CDN_TEMPLATE =
-  "https://raw.githubusercontent.com/{owner}/{repo}/{branch}/{path}";
-
 export const DEFAULT_SETTINGS: ImageBedUploaderSettings = {
   provider: "github",
   autoUpload: true,
   uploadOnDrop: true,
+  uploadInsertedLocalImages: true,
   uploadWhenClipboardHasText: true,
   imageExtensions: "png, jpg, jpeg, gif, webp, svg, bmp, avif",
   github: {
@@ -14,10 +12,10 @@ export const DEFAULT_SETTINGS: ImageBedUploaderSettings = {
     repo: "",
     branch: "main",
     token: "",
-    uploadPath: "images/{year}/{month}",
+    uploadPath: "images",
     commitMessage: "Upload {filename} from Obsidian",
     filenameStrategy: "timestamp-original",
-    cdnTemplate: DEFAULT_CDN_TEMPLATE,
+    cdnBaseUrl: "",
   },
   custom: {
     endpoint: "",
@@ -25,23 +23,37 @@ export const DEFAULT_SETTINGS: ImageBedUploaderSettings = {
     headersJson: "{}",
     extraFieldsJson: "{}",
     responseUrlPath: "data.url",
-    cdnTemplate: "{url}",
+    cdnBaseUrl: "",
   },
 };
 
 export function mergeSettings(
   saved: Partial<ImageBedUploaderSettings> | null | undefined,
 ): ImageBedUploaderSettings {
+  const github = {
+    ...DEFAULT_SETTINGS.github,
+    ...saved?.github,
+  };
+  const custom = {
+    ...DEFAULT_SETTINGS.custom,
+    ...saved?.custom,
+  };
+
+  // Old releases stored brace-based templates. They cannot be mapped safely
+  // to a directory URL, so an empty base falls back to GitHub Raw/the API URL.
+  if (!github.cdnBaseUrl && github.cdnTemplate && !github.cdnTemplate.includes("{")) {
+    github.cdnBaseUrl = github.cdnTemplate;
+  }
+  if (!custom.cdnBaseUrl && custom.cdnTemplate && !custom.cdnTemplate.includes("{")) {
+    custom.cdnBaseUrl = custom.cdnTemplate;
+  }
+  delete github.cdnTemplate;
+  delete custom.cdnTemplate;
+
   return {
     ...DEFAULT_SETTINGS,
     ...saved,
-    github: {
-      ...DEFAULT_SETTINGS.github,
-      ...saved?.github,
-    },
-    custom: {
-      ...DEFAULT_SETTINGS.custom,
-      ...saved?.custom,
-    },
+    github,
+    custom,
   };
 }
