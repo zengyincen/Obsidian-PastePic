@@ -23,7 +23,8 @@
   <a href="#30-秒配置-github"><strong>快速开始</strong></a>
   ·
   <a href="#cdn--代理基础路径"><strong>CDN 路径</strong></a>
-  <a href="./README.md">简体中文</a> · <a href="./README_EN.md">English</a>
+  ·
+  <a href="./README.md"><strong>简体中文</strong></a> · <a href="./README_EN.md"><strong>English</strong></a>
 </p>
 
 <p align="center">
