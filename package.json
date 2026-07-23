@@ -1,0 +1,29 @@
+{
+  "name": "obsidian-image-bed-uploader",
+  "version": "0.1.0",
+  "description": "Upload pasted images to GitHub or a custom image hosting API and insert accelerated CDN links.",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "npm run typecheck && node esbuild.config.mjs production",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "obsidian",
+    "image-upload",
+    "github",
+    "cdn"
+  ],
+  "author": "曾胤岑",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "builtin-modules": "^4.0.0",
+    "esbuild": "^0.28.1",
+    "obsidian": "^1.7.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.4"
+  }
+}
