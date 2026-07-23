@@ -117,8 +117,8 @@ npm run build
 | 场景 | 设置中填写的基础路径 | 最终生成链接 |
 | --- | --- | --- |
 | GitHub Raw | 留空 | 自动生成完整 Raw 链接 |
-| jsDelivr | `https://cdn.jsdelivr.net/gh/zengyincen/image-bed@main/images/` | `…/images/1730000000-note.png` |
-| Statically | `https://cdn.statically.io/gh/zengyincen/image-bed/main/images/` | `…/images/1730000000-note.png` |
+| jsDelivr | `https://cdn.jsdelivr.net/gh/zengyincen/image-bed@main/` | `…/1730000000-note.png` |
+| Statically | `https://cdn.statically.io/gh/zengyincen/image-bed/main/` | `…/1730000000-note.png` |
 | 自建代理/CDN | `https://cdn.example.com/xx/xx/` | `https://cdn.example.com/xx/xx/1730000000-note.png` |
 
 设置页会显示完整链接预览。自定义路径应与 GitHub 的“仓库内路径”指向同一目录。
