@@ -4,10 +4,6 @@
 </p>
 
 <p align="center">
-  <img src="./assets/banner.svg" alt="ObsiPastePic Banner" width="100%" />
-</p>
-
-<p align="center">
   <a href="https://github.com/zengyincen/ObsiPastePic/releases/latest"><img alt="最新版本" src="https://img.shields.io/github/v/release/zengyincen/ObsiPastePic?display_name=tag&sort=semver&style=flat-square&color=0A84FF" /></a>
   <a href="https://github.com/zengyincen/ObsiPastePic/releases"><img alt="下载量" src="https://img.shields.io/github/downloads/zengyincen/ObsiPastePic/total?style=flat-square&color=5E5CE6" /></a>
   <a href="https://github.com/zengyincen/ObsiPastePic/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/zengyincen/ObsiPastePic?style=flat-square&color=FFB340" /></a>
@@ -32,12 +28,17 @@
 </p>
 
 <p align="center">
-  <img src="./assets/hero.svg" alt="ObsiPastePic — Paste. Upload. Done." width="100%" />
+  <img src="./assets/banner.svg" alt="ObsiPastePic Banner" width="100%" />
 </p>
+
 
 ## 为什么是 ObsiPastePic？
 
 截图、网页图片和设计稿经常让 Obsidian 仓库迅速膨胀。手动打开图床、上传、复制链接、再返回笔记，又会打断写作节奏。
+
+<p align="center">
+  <img src="./assets/hero.svg" alt="ObsiPastePic — Paste. Upload. Done." width="100%" />
+</p>
 
 ObsiPastePic 只做一件事：**接住你粘贴、拖入或由 Obsidian 新插入的本地图片，上传，然后在原位置放回远程 Markdown 图片链接。** 上传过程有独立占位符；失败时恢复本地图片链接，不会留下无效的错误链接。
 
@@ -185,10 +186,9 @@ npm run build       # 生成 main.js
 
 ## 致谢
 
-ObsiPastePic 是独立实现的 MIT 开源项目。以下项目为事件处理、上传抽象、GitHub 图床与用户体验提供了重要参考：
+ObsiPastePic 是独立实现的 MIT 开源项目。以下项目为事件处理、上传、GitHub 图床与用户体验提供了重要参考：
 
-
-- [gavvvr/obsidian-imgur-plugin](https://github.com/gavvvr/obsidian-imgur-plugin) — 图片粘贴事件、上传器抽象与失败回退思路。
+- [gavvvr/obsidian-imgur-plugin](https://github.com/gavvvr/obsidian-imgur-plugin) — 图片粘贴事件、上传与失败回退思路。
 - [yaleiyale/obsidian-emo-uploader](https://github.com/yaleiyale/obsidian-emo-uploader) — GitHub Contents API、多图床配置与 CDN 链接组织方式。
 - [renmu123/obsidian-image-auto-upload-plugin](https://github.com/renmu123/obsidian-image-auto-upload-plugin) — 粘贴占位、拖放上传与图床工作流。
 - [jordanhandy/obsidian-cloudinary-uploader](https://github.com/jordanhandy/obsidian-cloudinary-uploader) — 被 Emo Uploader 明确列为 Cloudinary 实现资料。
