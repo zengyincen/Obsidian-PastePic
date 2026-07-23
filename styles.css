@@ -1,3 +1,21 @@
+.obsipastepic-settings-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.obsipastepic-settings-header img {
+  width: 52px;
+  height: 52px;
+  border-radius: 13px;
+  box-shadow: 0 8px 22px rgb(10 132 255 / 22%);
+}
+
+.obsipastepic-settings-header h1 {
+  margin: 0;
+}
+
 .obsipastepic-preview {
   margin: 0.5rem 0 1rem;
   padding: 0.65rem 0.8rem;

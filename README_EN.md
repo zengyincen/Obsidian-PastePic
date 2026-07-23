@@ -3,6 +3,10 @@
 </p>
 
 <p align="center">
+  <img src="./assets/icon.svg" alt="ObsiPastePic App Icon" width="128" height="128" />
+</p>
+
+<p align="center">
   <img src="./assets/banner.svg" alt="ObsiPastePic Banner" width="100%" />
 </p>
 
@@ -64,7 +68,7 @@ ObsiPastePic does one thing well: **it catches an image that is pasted, dropped,
    <your-vault>/.obsidian/plugins/obsipastepic/
    ```
 
-4. Make sure the folder contains `main.js`, `manifest.json`, and `styles.css`.
+4. Make sure the folder contains `main.js`, `manifest.json`, `styles.css`, and `assets/icon.svg`.
 5. Restart Obsidian and enable **ObsiPastePic** under Settings → Community plugins.
 
 > ObsiPastePic has not yet been submitted to the official Obsidian community-plugin directory. GitHub Releases are currently the canonical distribution channel.

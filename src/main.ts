@@ -1,5 +1,6 @@
-import { Editor, MarkdownView, Notice, Plugin, TFile } from "obsidian";
+import { addIcon, Editor, MarkdownView, Notice, Plugin, TFile } from "obsidian";
 import type { MarkdownFileInfo } from "obsidian";
+import { OBSIPASTE_ICON_ID, OBSIPASTE_ICON_SVG } from "./icon";
 import { DEFAULT_SETTINGS, mergeSettings } from "./settings";
 import { ObsiPastePicSettingTab } from "./settings-tab";
 import type { ObsiPastePicSettings, ImageUploader } from "./types";
@@ -20,6 +21,11 @@ interface PendingUpload {
   sourcePath: string;
 }
 
+interface SettingsController {
+  open(): void;
+  openTabById(id: string): void;
+}
+
 export default class ObsiPastePicPlugin extends Plugin {
   settings: ObsiPastePicSettings = DEFAULT_SETTINGS;
   private readonly knownReferences = new WeakMap<Editor, Map<string, number>>();
@@ -27,6 +33,8 @@ export default class ObsiPastePicPlugin extends Plugin {
 
   async onload(): Promise<void> {
     this.settings = mergeSettings(await this.loadData() as Partial<ObsiPastePicSettings> | null);
+    addIcon(OBSIPASTE_ICON_ID, OBSIPASTE_ICON_SVG);
+    this.addRibbonIcon(OBSIPASTE_ICON_ID, "ObsiPastePic", () => this.openSettings());
     this.addSettingTab(new ObsiPastePicSettingTab(this.app, this));
 
     this.registerEvent(
@@ -70,6 +78,16 @@ export default class ObsiPastePicPlugin extends Plugin {
 
   async saveSettings(): Promise<void> {
     await this.saveData(this.settings);
+  }
+
+  private openSettings(): void {
+    const controller = (this.app as typeof this.app & { setting?: SettingsController }).setting;
+    if (!controller) {
+      new Notice("ObsiPastePic");
+      return;
+    }
+    controller.open();
+    controller.openTabById(this.manifest.id);
   }
 
   private handleFiles(

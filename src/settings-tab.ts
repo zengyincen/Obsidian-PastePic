@@ -13,7 +13,17 @@ export class ObsiPastePicSettingTab extends PluginSettingTab {
   display(): void {
     const { containerEl } = this;
     containerEl.empty();
-    containerEl.createEl("h1", { text: "ObsiPastePic" });
+    const header = containerEl.createDiv({ cls: "obsipastepic-settings-header" });
+    const iconPath = this.plugin.manifest.dir
+      ? `${this.plugin.manifest.dir}/assets/icon.svg`
+      : ".obsidian/plugins/obsipastepic/assets/icon.svg";
+    header.createEl("img", {
+      attr: {
+        src: this.app.vault.adapter.getResourcePath(iconPath),
+        alt: "ObsiPastePic",
+      },
+    });
+    header.createEl("h1", { text: "ObsiPastePic" });
 
     const language = this.plugin.settings.language;
     new Setting(containerEl)

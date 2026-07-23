@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1 — 2026-07-23
+
+- Register a custom ObsiPastePic ribbon icon that opens the plugin settings.
+- Display the full-color brand icon in the settings header.
+- Include `assets/icon.svg` in the release installation package.
+
 ## 0.4.0 — 2026-07-23
 
 - Add a settings-page language selector with Simplified Chinese, English, Japanese, Korean, Italian, Spanish, German, and French.
