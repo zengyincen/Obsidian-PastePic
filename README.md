@@ -24,7 +24,7 @@
   ·
   <a href="#cdn--代理基础路径"><strong>CDN 路径</strong></a>
   ·
-  <a href="./README.md"><strong>简体中文</strong></a> · <a href="./README_EN.md"><strong>English</strong></a>
+  <ins><strong>简体中文</strong></ins> · <a href="./README_EN.md"><strong>English</strong></a>
 </p>
 
 <p align="center">
