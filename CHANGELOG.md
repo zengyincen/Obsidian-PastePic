@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0 — 2026-07-23
+
+- Standardize the project, repository, package, plugin ID, install directory, and internal names as **ObsiPastePic**.
+- Keep redirects from the former GitHub repository URL for existing links.
+
 ## 0.2.0 — 2026-07-23
 
 - Upload images pasted, dropped, or newly inserted as local Obsidian links.

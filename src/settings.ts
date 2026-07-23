@@ -1,6 +1,6 @@
-import type { ImageBedUploaderSettings } from "./types";
+import type { ObsiPastePicSettings } from "./types";
 
-export const DEFAULT_SETTINGS: ImageBedUploaderSettings = {
+export const DEFAULT_SETTINGS: ObsiPastePicSettings = {
   provider: "github",
   autoUpload: true,
   uploadOnDrop: true,
@@ -28,8 +28,8 @@ export const DEFAULT_SETTINGS: ImageBedUploaderSettings = {
 };
 
 export function mergeSettings(
-  saved: Partial<ImageBedUploaderSettings> | null | undefined,
-): ImageBedUploaderSettings {
+  saved: Partial<ObsiPastePicSettings> | null | undefined,
+): ObsiPastePicSettings {
   const github = {
     ...DEFAULT_SETTINGS.github,
     ...saved?.github,

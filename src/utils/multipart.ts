@@ -27,7 +27,7 @@ export async function createMultipartBody(
   fileField: string,
   fields: Record<string, string>,
 ): Promise<{ body: ArrayBuffer; contentType: string }> {
-  const boundary = `ImageBedUploader${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`;
+  const boundary = `ObsiPastePic${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`;
   const parts: Uint8Array[] = [];
 
   for (const [name, value] of Object.entries(fields)) {

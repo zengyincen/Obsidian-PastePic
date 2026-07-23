@@ -7,12 +7,12 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/zengyincen/obsidian-image-bed-uploader/releases/latest"><img alt="最新版本" src="https://img.shields.io/github/v/release/zengyincen/obsidian-image-bed-uploader?display_name=tag&sort=semver&style=flat-square&color=0A84FF" /></a>
-  <a href="https://github.com/zengyincen/obsidian-image-bed-uploader/releases"><img alt="下载量" src="https://img.shields.io/github/downloads/zengyincen/obsidian-image-bed-uploader/total?style=flat-square&color=5E5CE6" /></a>
-  <a href="https://github.com/zengyincen/obsidian-image-bed-uploader/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/zengyincen/obsidian-image-bed-uploader?style=flat-square&color=FFB340" /></a>
-  <a href="https://github.com/zengyincen/obsidian-image-bed-uploader/commits/main"><img alt="最后提交" src="https://img.shields.io/github/last-commit/zengyincen/obsidian-image-bed-uploader?style=flat-square&color=30D158" /></a>
-  <a href="https://github.com/zengyincen/obsidian-image-bed-uploader/issues"><img alt="Issues" src="https://img.shields.io/github/issues/zengyincen/obsidian-image-bed-uploader?style=flat-square&color=FF9F0A" /></a>
-  <a href="./LICENSE"><img alt="License" src="https://img.shields.io/github/license/zengyincen/obsidian-image-bed-uploader?style=flat-square&color=8E8E93" /></a>
+  <a href="https://github.com/zengyincen/ObsiPastePic/releases/latest"><img alt="最新版本" src="https://img.shields.io/github/v/release/zengyincen/ObsiPastePic?display_name=tag&sort=semver&style=flat-square&color=0A84FF" /></a>
+  <a href="https://github.com/zengyincen/ObsiPastePic/releases"><img alt="下载量" src="https://img.shields.io/github/downloads/zengyincen/ObsiPastePic/total?style=flat-square&color=5E5CE6" /></a>
+  <a href="https://github.com/zengyincen/ObsiPastePic/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/zengyincen/ObsiPastePic?style=flat-square&color=FFB340" /></a>
+  <a href="https://github.com/zengyincen/ObsiPastePic/commits/main"><img alt="最后提交" src="https://img.shields.io/github/last-commit/zengyincen/ObsiPastePic?style=flat-square&color=30D158" /></a>
+  <a href="https://github.com/zengyincen/ObsiPastePic/issues"><img alt="Issues" src="https://img.shields.io/github/issues/zengyincen/ObsiPastePic?style=flat-square&color=FF9F0A" /></a>
+  <a href="./LICENSE"><img alt="License" src="https://img.shields.io/github/license/zengyincen/ObsiPastePic?style=flat-square&color=8E8E93" /></a>
 </p>
 
 <p align="center">
@@ -21,7 +21,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/zengyincen/obsidian-image-bed-uploader/releases/latest"><strong>下载最新版本</strong></a>
+  <a href="https://github.com/zengyincen/ObsiPastePic/releases/latest"><strong>下载最新版本</strong></a>
   ·
   <a href="#30-秒配置-github"><strong>快速开始</strong></a>
   ·
@@ -55,12 +55,12 @@ ObsiPastePic 只做一件事：**接住你粘贴、拖入或由 Obsidian 新插�
 
 ### 从 Release 安装
 
-1. 打开 [Latest Release](https://github.com/zengyincen/obsidian-image-bed-uploader/releases/latest)。
+1. 打开 [Latest Release](https://github.com/zengyincen/ObsiPastePic/releases/latest)。
 2. 下载 `obsipastepic-*.zip`。
 3. 解压到你的 Obsidian 仓库：
 
    ```text
-   <你的仓库>/.obsidian/plugins/image-bed-uploader/
+   <你的仓库>/.obsidian/plugins/obsipastepic/
    ```
 
 4. 确认文件夹中至少包含 `main.js`、`manifest.json`、`styles.css`。
@@ -71,8 +71,8 @@ ObsiPastePic 只做一件事：**接住你粘贴、拖入或由 Obsidian 新插�
 ### 从源码构建
 
 ```bash
-git clone https://github.com/zengyincen/obsidian-image-bed-uploader.git
-cd obsidian-image-bed-uploader
+git clone https://github.com/zengyincen/ObsiPastePic.git
+cd ObsiPastePic
 npm install
 npm test
 npm run build

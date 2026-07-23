@@ -24,7 +24,7 @@ export interface CustomApiSettings {
   cdnTemplate?: string;
 }
 
-export interface ImageBedUploaderSettings {
+export interface ObsiPastePicSettings {
   provider: UploadProvider;
   autoUpload: boolean;
   uploadOnDrop: boolean;

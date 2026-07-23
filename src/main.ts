@@ -1,8 +1,8 @@
 import { Editor, MarkdownView, Notice, Plugin, TFile } from "obsidian";
 import type { MarkdownFileInfo } from "obsidian";
 import { DEFAULT_SETTINGS, mergeSettings } from "./settings";
-import { ImageBedUploaderSettingTab } from "./settings-tab";
-import type { ImageBedUploaderSettings, ImageUploader } from "./types";
+import { ObsiPastePicSettingTab } from "./settings-tab";
+import type { ObsiPastePicSettings, ImageUploader } from "./types";
 import { createUploader } from "./uploaders";
 import {
   countReferenceSources,
@@ -20,14 +20,14 @@ interface PendingUpload {
   sourcePath: string;
 }
 
-export default class ImageBedUploaderPlugin extends Plugin {
-  settings: ImageBedUploaderSettings = DEFAULT_SETTINGS;
+export default class ObsiPastePicPlugin extends Plugin {
+  settings: ObsiPastePicSettings = DEFAULT_SETTINGS;
   private readonly knownReferences = new WeakMap<Editor, Map<string, number>>();
   private readonly scanTimers = new WeakMap<Editor, number>();
 
   async onload(): Promise<void> {
-    this.settings = mergeSettings(await this.loadData() as Partial<ImageBedUploaderSettings> | null);
-    this.addSettingTab(new ImageBedUploaderSettingTab(this.app, this));
+    this.settings = mergeSettings(await this.loadData() as Partial<ObsiPastePicSettings> | null);
+    this.addSettingTab(new ObsiPastePicSettingTab(this.app, this));
 
     this.registerEvent(
       this.app.workspace.on("editor-paste", (event, editor, info) => {
@@ -156,7 +156,7 @@ export default class ImageBedUploaderPlugin extends Plugin {
     const id = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
     return {
       file,
-      placeholder: `![正在上传 ${escapeMarkdownAlt(file.name || "image")}](image-bed-uploader://${id})`,
+      placeholder: `![正在上传 ${escapeMarkdownAlt(file.name || "image")}](obsipastepic://${id})`,
       fallbackMarkdown,
       sourcePath,
     };

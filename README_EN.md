@@ -7,12 +7,12 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/zengyincen/obsidian-image-bed-uploader/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/zengyincen/obsidian-image-bed-uploader?display_name=tag&sort=semver&style=flat-square&color=0A84FF" /></a>
-  <a href="https://github.com/zengyincen/obsidian-image-bed-uploader/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/zengyincen/obsidian-image-bed-uploader/total?style=flat-square&color=5E5CE6" /></a>
-  <a href="https://github.com/zengyincen/obsidian-image-bed-uploader/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/zengyincen/obsidian-image-bed-uploader?style=flat-square&color=FFB340" /></a>
-  <a href="https://github.com/zengyincen/obsidian-image-bed-uploader/commits/main"><img alt="Last commit" src="https://img.shields.io/github/last-commit/zengyincen/obsidian-image-bed-uploader?style=flat-square&color=30D158" /></a>
-  <a href="https://github.com/zengyincen/obsidian-image-bed-uploader/issues"><img alt="Issues" src="https://img.shields.io/github/issues/zengyincen/obsidian-image-bed-uploader?style=flat-square&color=FF9F0A" /></a>
-  <a href="./LICENSE"><img alt="License" src="https://img.shields.io/github/license/zengyincen/obsidian-image-bed-uploader?style=flat-square&color=8E8E93" /></a>
+  <a href="https://github.com/zengyincen/ObsiPastePic/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/zengyincen/ObsiPastePic?display_name=tag&sort=semver&style=flat-square&color=0A84FF" /></a>
+  <a href="https://github.com/zengyincen/ObsiPastePic/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/zengyincen/ObsiPastePic/total?style=flat-square&color=5E5CE6" /></a>
+  <a href="https://github.com/zengyincen/ObsiPastePic/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/zengyincen/ObsiPastePic?style=flat-square&color=FFB340" /></a>
+  <a href="https://github.com/zengyincen/ObsiPastePic/commits/main"><img alt="Last commit" src="https://img.shields.io/github/last-commit/zengyincen/ObsiPastePic?style=flat-square&color=30D158" /></a>
+  <a href="https://github.com/zengyincen/ObsiPastePic/issues"><img alt="Issues" src="https://img.shields.io/github/issues/zengyincen/ObsiPastePic?style=flat-square&color=FF9F0A" /></a>
+  <a href="./LICENSE"><img alt="License" src="https://img.shields.io/github/license/zengyincen/ObsiPastePic?style=flat-square&color=8E8E93" /></a>
 </p>
 
 <p align="center">
@@ -21,7 +21,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/zengyincen/obsidian-image-bed-uploader/releases/latest"><strong>Download</strong></a>
+  <a href="https://github.com/zengyincen/ObsiPastePic/releases/latest"><strong>Download</strong></a>
   ·
   <a href="#github-setup-in-30-seconds"><strong>Quick start</strong></a>
   ·
@@ -55,12 +55,12 @@ ObsiPastePic does one thing well: **it catches an image that is pasted, dropped,
 
 ### Install from a Release
 
-1. Open the [latest Release](https://github.com/zengyincen/obsidian-image-bed-uploader/releases/latest).
+1. Open the [latest Release](https://github.com/zengyincen/ObsiPastePic/releases/latest).
 2. Download `obsipastepic-*.zip`.
 3. Extract it to:
 
    ```text
-   <your-vault>/.obsidian/plugins/image-bed-uploader/
+   <your-vault>/.obsidian/plugins/obsipastepic/
    ```
 
 4. Make sure the folder contains `main.js`, `manifest.json`, and `styles.css`.
@@ -71,8 +71,8 @@ ObsiPastePic does one thing well: **it catches an image that is pasted, dropped,
 ### Build from source
 
 ```bash
-git clone https://github.com/zengyincen/obsidian-image-bed-uploader.git
-cd obsidian-image-bed-uploader
+git clone https://github.com/zengyincen/ObsiPastePic.git
+cd ObsiPastePic
 npm install
 npm test
 npm run build

@@ -1,10 +1,10 @@
 import { App, Notice, PluginSettingTab, Setting, requestUrl } from "obsidian";
-import type ImageBedUploaderPlugin from "./main";
+import type ObsiPastePicPlugin from "./main";
 import { githubHeaders, buildGitHubPublicUrl, validateGitHubSettings } from "./uploaders/github";
 import { validateCustomApiSettings } from "./uploaders/custom-api";
 
-export class ImageBedUploaderSettingTab extends PluginSettingTab {
-  constructor(app: App, private readonly plugin: ImageBedUploaderPlugin) {
+export class ObsiPastePicSettingTab extends PluginSettingTab {
+  constructor(app: App, private readonly plugin: ObsiPastePicPlugin) {
     super(app, plugin);
   }
 
@@ -138,7 +138,7 @@ export class ImageBedUploaderSettingTab extends PluginSettingTab {
       });
 
     containerEl.createDiv({
-      cls: "image-bed-uploader-warning",
+      cls: "obsipastepic-warning",
       text: "安全提示：Obsidian 插件配置不是密钥保险箱，请只授予该 Token 单一仓库的最小权限。",
     });
 
@@ -183,7 +183,7 @@ export class ImageBedUploaderSettingTab extends PluginSettingTab {
       );
 
     containerEl.createEl("h2", { text: "CDN / 代理加速" });
-    const preview = containerEl.createDiv({ cls: "image-bed-uploader-preview" });
+    const preview = containerEl.createDiv({ cls: "obsipastepic-preview" });
     const updatePreview = (): void => {
       preview.setText(
         buildGitHubPublicUrl(settings, "images/example image.png"),
