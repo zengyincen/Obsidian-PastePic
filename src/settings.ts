@@ -1,6 +1,8 @@
 import type { ObsiPastePicSettings } from "./types";
+import { isAppLanguage } from "./i18n";
 
 export const DEFAULT_SETTINGS: ObsiPastePicSettings = {
+  language: "zh-CN",
   provider: "github",
   autoUpload: true,
   uploadOnDrop: true,
@@ -12,7 +14,7 @@ export const DEFAULT_SETTINGS: ObsiPastePicSettings = {
     repo: "",
     branch: "main",
     token: "",
-    uploadPath: "images",
+    uploadPath: "",
     commitMessage: "Upload {filename} from Obsidian",
     filenameStrategy: "timestamp-original",
     cdnBaseUrl: "",
@@ -53,6 +55,10 @@ export function mergeSettings(
   return {
     ...DEFAULT_SETTINGS,
     ...saved,
+    language:
+      typeof saved?.language === "string" && isAppLanguage(saved.language)
+        ? saved.language
+        : DEFAULT_SETTINGS.language,
     github,
     custom,
   };

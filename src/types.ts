@@ -1,3 +1,5 @@
+import type { AppLanguage } from "./i18n";
+
 export type UploadProvider = "github" | "custom";
 
 export interface GitHubSettings {
@@ -25,6 +27,7 @@ export interface CustomApiSettings {
 }
 
 export interface ObsiPastePicSettings {
+  language: AppLanguage;
   provider: UploadProvider;
   autoUpload: boolean;
   uploadOnDrop: boolean;

@@ -48,6 +48,7 @@ ObsiPastePic does one thing well: **it catches an image that is pasted, dropped,
 | GitHub image hosting | GitHub Contents API with branches, date paths, and commit-message templates |
 | Generic image-host API | `POST multipart/form-data` with custom headers, file field, and extra form fields |
 | CDN / proxy acceleration | Enter an image-directory base URL; the plugin appends the filename and extension |
+| Multilingual settings | Simplified Chinese, English, Japanese, Korean, Italian, Spanish, German, and French |
 | Native fallback | Leaves Obsidian untouched when there is no image, mixed file types, or missing configuration |
 | Desktop and mobile | No local executable dependency and no desktop-only manifest restriction |
 
@@ -91,13 +92,9 @@ npm run build
 
 ### Paths and filenames
 
-The default repository path is:
+The repository path is empty by default, so images are uploaded to the repository root. You can instead enter a fixed directory such as `images`; when using a custom CDN, point its base URL to the same directory.
 
-```text
-images
-```
-
-Use a fixed directory so the CDN base URL can point to the same location reliably.
+The settings page defaults to Simplified Chinese and can be switched to English, Japanese, Korean, Italian, Spanish, German, or French at any time.
 
 Filename strategies:
 

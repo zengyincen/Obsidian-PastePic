@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0 — 2026-07-23
+
+- Add a settings-page language selector with Simplified Chinese, English, Japanese, Korean, Italian, Spanish, German, and French.
+- Default new installations to Simplified Chinese.
+- Leave the GitHub repository upload path empty by default so images upload to the repository root.
+
 ## 0.3.0 — 2026-07-23
 
 - Standardize the project, repository, package, plugin ID, install directory, and internal names as **ObsiPastePic**.
