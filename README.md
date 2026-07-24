@@ -211,4 +211,4 @@ Thank you to [Obsidian](https://obsidian.md/) for the plugin API, and to every m
 
 ## License
 
-[MIT](./LICENSE) © 2026 曾胤岑
+[MIT](./LICENSE) © 2026 zengyincen
