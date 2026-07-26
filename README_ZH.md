@@ -16,8 +16,8 @@
 </p>
 
 <p align="center">
-  <strong>粘贴一次，自动上传，立即引用。</strong><br />
-  Pastepic 把粘贴到 Obsidian 的图片上传到 GitHub 仓库或你的图床，并写入可自定义的 CDN / 代理链接。
+  <strong>一个插件，每块屏幕都能用。</strong><br />
+  Pastepic 为电脑、平板、手机上的 Obsidian 提供一致的自动图片上传体验。
 </p>
 
 <p align="center">
@@ -42,6 +42,8 @@
 
 Pastepic 只做一件事：**接住你粘贴、拖入或由 Obsidian 新插入的本地图片，上传，然后在原位置放回远程 Markdown 图片链接。** 上传过程有独立占位符；失败时恢复本地图片链接，不会留下无效的错误链接。
 
+**无论电脑、平板还是手机，工作流始终一致。** 在同步的仓库中配置一次 Pastepic，即可在每块屏幕上沿用同一个 GitHub / 图床目标、CDN 路径和粘贴上传体验。
+
 ## 功能一览
 
 | 能力 | 说明 |
@@ -54,7 +56,8 @@ Pastepic 只做一件事：**接住你粘贴、拖入或由 Obsidian 新插入�
 | CDN / 代理加速 | 只填写图片目录基础路径，插件自动追加图片名和后缀 |
 | 多语言设置 | 设置页支持简体中文、英语、日语、韩语、意大利语、西班牙语、德语和法语 |
 | 安全的原生回退 | 没有图片、混入非图片文件或配置缺失时，不接管 Obsidian 原生行为 |
-| 桌面与移动端 | 支持桌面版与手机版 Obsidian；移动端包含剪贴板项目回退处理 |
+| 全平台全端 | 电脑、平板、手机上的 Obsidian 共用同一套图片工作流 |
+| 移动端粘贴优化 | 针对 iOS、Android 和移动 WebView 提供剪贴板项目回退处理 |
 
 ## 安装
 
@@ -71,7 +74,7 @@ Pastepic 只做一件事：**接住你粘贴、拖入或由 Obsidian 新插入�
 4. 把下载的三个文件放入该目录。彩色图标已经内嵌在 `main.js` 中，不需要额外素材文件。
 5. 重启 Obsidian，在「设置 → 第三方插件」中启用 **Pastepic**。
 
-> Pastepic 已上架 [Obsidian 官方社区插件目录](https://community.obsidian.md/plugins/obsipastepic)。0.4.12 支持当前正式版：Obsidian 移动端 1.12.4、桌面端 1.12.7 及以上版本。
+> Pastepic 已上架 [Obsidian 官方社区插件目录](https://community.obsidian.md/plugins/obsipastepic)。0.4.13 支持当前正式版：Obsidian 移动端 1.12.4、桌面端 1.12.7 及以上版本。
 
 > 对外显示名称统一为 **Pastepic**。插件 ID 和安装目录继续使用 `obsipastepic`，以保持现有安装与设置兼容。
 
@@ -104,7 +107,7 @@ npm run build
 
 ### 移动端支持
 
-Pastepic 支持 iOS 和 Android 版 Obsidian。直接从系统剪贴板粘贴图片即可上传到已配置的 GitHub 仓库或图床；即使移动端 WebView 没有提供 `clipboard.files`，而是通过剪贴板项目提供图片，也可以正常处理。移动系统通常不提供与桌面相同的拖放交互，因此手机版建议使用粘贴或先将图片插入笔记；拖放设置仍会保留给支持拖放事件的平台。
+Pastepic 支持电脑、平板和手机上的 Obsidian，包括 iOS 与 Android。直接从系统剪贴板粘贴图片即可上传到已配置的 GitHub 仓库或图床；即使移动端 WebView 没有提供 `clipboard.files`，而是通过剪贴板项目提供图片，也可以正常处理。移动系统通常不提供与桌面相同的拖放交互，因此平板和手机版建议使用粘贴或先将图片插入笔记；拖放设置仍会保留给支持拖放事件的平台。
 
 文件命名支持：
 

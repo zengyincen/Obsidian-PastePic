@@ -12,8 +12,8 @@
 </p>
 
 <p align="center">
-  <strong>Paste once. Upload automatically. Link instantly.</strong><br />
-  Pastepic uploads images pasted into Obsidian to GitHub or your image host, then inserts a customizable CDN or proxy URL.
+  <strong>One plugin. Every screen.</strong><br />
+  Pastepic brings the same automatic image-upload workflow to Obsidian on desktop, tablet, and mobile.
 </p>
 
 <p align="center">
@@ -42,6 +42,8 @@ Screenshots, web images, and design exports can make an Obsidian vault grow quic
 
 Pastepic does one thing well: **it catches an image that is pasted, dropped, or newly inserted as a local Obsidian link, uploads it, and puts the remote Markdown image link back in the same place.** Every upload gets a unique placeholder. A failed upload restores the local image link instead of leaving a broken error link.
 
+**Desktop, tablet, or phone—the workflow stays the same.** Configure Pastepic once in your synced vault and keep the same GitHub or image-host destination, CDN path, and paste-to-upload experience on every screen.
+
 ## Features
 
 | Capability | Details |
@@ -54,7 +56,8 @@ Pastepic does one thing well: **it catches an image that is pasted, dropped, or 
 | CDN / proxy acceleration | Enter an image-directory base URL; the plugin appends the filename and extension |
 | Multilingual settings | Simplified Chinese, English, Japanese, Korean, Italian, Spanish, German, and French |
 | Native fallback | Leaves Obsidian untouched when there is no image, mixed file types, or missing configuration |
-| Desktop and mobile | Works on desktop and mobile Obsidian; mobile paste uses a clipboard-items fallback |
+| Every screen | One image workflow across desktop, tablet, and mobile Obsidian |
+| Mobile-ready paste | Clipboard-items fallback for iOS, Android, and mobile WebViews |
 
 ## Installation
 
@@ -71,7 +74,7 @@ Pastepic does one thing well: **it catches an image that is pasted, dropped, or 
 4. Put the three downloaded files in that directory. The color icon is bundled into `main.js`, so no additional asset file is required.
 5. Restart Obsidian and enable **Pastepic** under Settings → Community plugins.
 
-> Pastepic is available in the official [Obsidian community directory](https://community.obsidian.md/plugins/obsipastepic). Version 0.4.12 supports the current stable releases: Obsidian Mobile 1.12.4 and Desktop 1.12.7 or later.
+> Pastepic is available in the official [Obsidian community directory](https://community.obsidian.md/plugins/obsipastepic). Version 0.4.13 supports the current stable releases: Obsidian Mobile 1.12.4 and Desktop 1.12.7 or later.
 
 > The user-facing name is **Pastepic**. The plugin ID and installation directory remain `obsipastepic` to preserve existing installations and settings.
 
@@ -104,7 +107,7 @@ The settings page defaults to Simplified Chinese and can be switched to English,
 
 ### Mobile support
 
-Pastepic supports Obsidian on iOS and Android. Pasting an image from the system clipboard uploads it through the configured GitHub repository or image host, including mobile WebViews that expose the image through clipboard items instead of a file list. Mobile operating systems do not provide the same drag-and-drop interaction as desktop, so use paste or insert the image into the note; the optional drop setting remains available for platforms that provide drop events.
+Pastepic supports Obsidian across desktop computers, tablets, and phones, including iOS and Android. Pasting an image from the system clipboard uploads it through the configured GitHub repository or image host, including mobile WebViews that expose the image through clipboard items instead of a file list. Mobile operating systems do not provide the same drag-and-drop interaction as desktop, so use paste or insert the image into the note; the optional drop setting remains available for platforms that provide drop events.
 
 Filename strategies:
 

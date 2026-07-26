@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.13 — 2026-07-26
+
+- Present desktop, tablet, and mobile support as a core Pastepic benefit across both READMEs and project descriptions.
+- Refresh the banner and hero artwork with a unified every-screen message and device visuals while preserving the existing brand icon.
+
 ## 0.4.12 — 2026-07-26
 
 - Change the default GitHub commit message to `Upload from Pastepic`.
