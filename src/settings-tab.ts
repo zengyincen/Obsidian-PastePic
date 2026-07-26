@@ -1,6 +1,5 @@
 import { Notice, PluginSettingTab, requestUrl, Setting } from "obsidian";
 import type { App } from "obsidian";
-import brandIconDataUrl from "../assets/icon.svg";
 import type PastepicPlugin from "./main";
 import { isAppLanguage, LANGUAGE_OPTIONS, t } from "./i18n";
 import type { MessageKey } from "./i18n";
@@ -16,7 +15,6 @@ export class PastepicSettingTab extends PluginSettingTab {
   override display(): void {
     const { containerEl } = this;
     containerEl.empty();
-    this.renderHeader(containerEl);
     this.renderRows(containerEl, this.generalDefinitions());
     new Setting(containerEl)
       .setName(this.tr(this.plugin.settings.provider === "github" ? "githubHeading" : "customHeading"))
@@ -29,16 +27,28 @@ export class PastepicSettingTab extends PluginSettingTab {
     );
   }
 
-  private renderHeader(containerEl: HTMLElement): void {
-    const setting = new Setting(containerEl).setName("Pastepic").setHeading();
-    setting.settingEl.addClass("obsipastepic-settings-header");
-    const image = setting.settingEl.createEl("img", {
-      attr: {
-        src: brandIconDataUrl,
-        alt: "Pastepic",
+  /**
+   * Obsidian 1.13+ uses these definitions for rendering and settings search.
+   * Obsidian 1.12.x ignores this method and calls display() instead.
+   */
+  getSettingDefinitions(): CompatibleSettingDefinitionItem[] {
+    return [
+      {
+        type: "group",
+        items: this.toSettingDefinitions(this.generalDefinitions()),
       },
-    });
-    setting.settingEl.prepend(image);
+      {
+        type: "group",
+        heading: this.tr(
+          this.plugin.settings.provider === "github" ? "githubHeading" : "customHeading",
+        ),
+        items: this.toSettingDefinitions(
+          this.plugin.settings.provider === "github"
+            ? this.githubDefinitions()
+            : this.customApiDefinitions(),
+        ),
+      },
+    ];
   }
 
   private generalDefinitions(): SettingRow[] {
@@ -52,7 +62,7 @@ export class PastepicSettingTab extends PluginSettingTab {
             if (!isAppLanguage(value)) return;
             this.plugin.settings.language = value;
             await this.plugin.saveSettings();
-            this.display();
+            this.refreshSettings();
           });
         });
       }),
@@ -112,7 +122,7 @@ export class PastepicSettingTab extends PluginSettingTab {
             .onChange(async (value) => {
               this.plugin.settings.provider = value === "custom" ? "custom" : "github";
               await this.plugin.saveSettings();
-              this.display();
+              this.refreshSettings();
             }),
         );
       }),
@@ -214,7 +224,7 @@ export class PastepicSettingTab extends PluginSettingTab {
             button.setButtonText(this.tr("useRaw")).onClick(async () => {
               settings.cdnBaseUrl = "";
               await this.plugin.saveSettings();
-              this.display();
+              this.refreshSettings();
             }),
           );
         updatePreview();
@@ -346,6 +356,23 @@ export class PastepicSettingTab extends PluginSettingTab {
     }
   }
 
+  private toSettingDefinitions(rows: SettingRow[]): CompatibleSettingDefinitionRender[] {
+    return rows.map((row) => ({
+      name: row.name,
+      desc: row.desc,
+      render: row.configure,
+    }));
+  }
+
+  private refreshSettings(): void {
+    const update = Reflect.get(this, "update") as unknown;
+    if (typeof update === "function") {
+      update.call(this);
+    } else {
+      this.display();
+    }
+  }
+
   private tr(key: MessageKey, variables?: Record<string, string | number>): string {
     return t(this.plugin.settings.language, key, variables);
   }
@@ -360,3 +387,19 @@ interface SettingRow {
   desc?: string;
   configure: (setting: Setting) => void;
 }
+
+interface CompatibleSettingDefinitionRender {
+  name: string;
+  desc?: string;
+  render: (setting: Setting) => void;
+}
+
+interface CompatibleSettingDefinitionGroup {
+  type: "group";
+  heading?: string;
+  items: CompatibleSettingDefinitionRender[];
+}
+
+type CompatibleSettingDefinitionItem =
+  | CompatibleSettingDefinitionRender
+  | CompatibleSettingDefinitionGroup;

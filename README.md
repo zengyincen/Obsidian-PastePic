@@ -71,7 +71,7 @@ Pastepic does one thing well: **it catches an image that is pasted, dropped, or 
 4. Put the three downloaded files in that directory. The color icon is bundled into `main.js`, so no additional asset file is required.
 5. Restart Obsidian and enable **Pastepic** under Settings → Community plugins.
 
-> Pastepic is available in the official [Obsidian community directory](https://community.obsidian.md/plugins/obsipastepic). Version 0.4.10 supports the current stable releases: Obsidian Mobile 1.12.4 and Desktop 1.12.7 or later.
+> Pastepic is available in the official [Obsidian community directory](https://community.obsidian.md/plugins/obsipastepic). Version 0.4.11 supports the current stable releases: Obsidian Mobile 1.12.4 and Desktop 1.12.7 or later.
 
 > The user-facing name is **Pastepic**. The plugin ID and installation directory remain `obsipastepic` to preserve existing installations and settings.
 

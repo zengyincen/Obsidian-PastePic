@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.11 — 2026-07-26
+
+- Remove the redundant plugin-name heading from the settings page.
+- Add declarative setting definitions for Obsidian 1.13+ settings search while retaining the 1.12.x `display()` compatibility fallback.
+- Validate the dual settings implementation with the official Obsidian ESLint rules.
+
 ## 0.4.10 — 2026-07-26
 
 - Restore support for the current stable Obsidian releases: mobile 1.12.4 and desktop 1.12.7.
