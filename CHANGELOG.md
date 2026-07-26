@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.9 — 2026-07-26
+
+- Improve mobile Obsidian paste support by reading image files from clipboard items when `clipboard.files` is empty.
+- Document iOS and Android paste behavior and desktop-only drag-and-drop limitations.
+
 ## 0.4.8 — 2026-07-24
 
 - Remove the Obsidian ribbon icon so Pastepic no longer appears in the left toolbar.

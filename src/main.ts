@@ -12,6 +12,7 @@ import {
 } from "./utils/local-images";
 import type { EmbeddedImageReference } from "./utils/local-images";
 import { createMarkdownImage, escapeMarkdownAlt } from "./utils/template";
+import { getClipboardFiles } from "./utils/clipboard";
 
 interface PendingUpload {
   file: File;
@@ -38,7 +39,7 @@ export default class PastepicPlugin extends Plugin {
         if (!this.settings.uploadWhenClipboardHasText && clipboard.getData("text/plain").trim()) {
           return;
         }
-        if (this.handleFiles(Array.from(clipboard.files), editor, info.file?.path ?? "")) {
+        if (this.handleFiles(getClipboardFiles(clipboard), editor, info.file?.path ?? "")) {
           event.preventDefault();
           event.stopPropagation();
           event.stopImmediatePropagation();

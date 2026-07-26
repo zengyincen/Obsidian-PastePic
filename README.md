@@ -54,7 +54,7 @@ Pastepic does one thing well: **it catches an image that is pasted, dropped, or 
 | CDN / proxy acceleration | Enter an image-directory base URL; the plugin appends the filename and extension |
 | Multilingual settings | Simplified Chinese, English, Japanese, Korean, Italian, Spanish, German, and French |
 | Native fallback | Leaves Obsidian untouched when there is no image, mixed file types, or missing configuration |
-| Desktop and mobile | No local executable dependency and no desktop-only manifest restriction |
+| Desktop and mobile | Works on desktop and mobile Obsidian; mobile paste uses a clipboard-items fallback |
 
 ## Installation
 
@@ -101,6 +101,10 @@ npm run build
 The repository path is empty by default, so images are uploaded to the repository root. You can instead enter a fixed directory such as `images`; when using a custom CDN, point its base URL to the same directory.
 
 The settings page defaults to Simplified Chinese and can be switched to English, Japanese, Korean, Italian, Spanish, German, or French at any time.
+
+### Mobile support
+
+Pastepic supports Obsidian on iOS and Android. Pasting an image from the system clipboard uploads it through the configured GitHub repository or image host, including mobile WebViews that expose the image through clipboard items instead of a file list. Mobile operating systems do not provide the same drag-and-drop interaction as desktop, so use paste or insert the image into the note; the optional drop setting remains available for platforms that provide drop events.
 
 Filename strategies:
 
