@@ -74,7 +74,7 @@ Pastepic 只做一件事：**接住你粘贴、拖入或由 Obsidian 新插入�
 4. 把下载的三个文件放入该目录。彩色图标已经内嵌在 `main.js` 中，不需要额外素材文件。
 5. 重启 Obsidian，在「设置 → 第三方插件」中启用 **Pastepic**。
 
-> Pastepic 已上架 [Obsidian 官方社区插件目录](https://community.obsidian.md/plugins/obsipastepic)。0.4.13 支持当前正式版：Obsidian 移动端 1.12.4、桌面端 1.12.7 及以上版本。
+> Pastepic 已上架 [Obsidian 官方社区插件目录](https://community.obsidian.md/plugins/obsipastepic)。0.4.14 支持当前正式版：Obsidian 移动端 1.12.4、桌面端 1.12.7 及以上版本。
 
 > 对外显示名称统一为 **Pastepic**。插件 ID 和安装目录继续使用 `obsipastepic`，以保持现有安装与设置兼容。
 
@@ -212,4 +212,4 @@ Pastepic 是独立实现的 MIT 开源项目。以下项目为事件处理、上
 
 ## License
 
-[MIT](./LICENSE) © 2026 曾胤岑
+[MIT](./LICENSE) © 2026 zengyincen

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.14 — 2026-07-26
+
+- Standardize the author name as `zengyincen` in Obsidian metadata and project attribution.
+
 ## 0.4.13 — 2026-07-26
 
 - Present desktop, tablet, and mobile support as a core Pastepic benefit across both READMEs and project descriptions.

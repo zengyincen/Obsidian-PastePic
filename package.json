@@ -1,6 +1,6 @@
 {
   "name": "obsipastepic",
-  "version": "0.4.13",
+  "version": "0.4.14",
   "description": "Pastepic uploads images from desktop, tablet, and mobile Obsidian to GitHub or a custom image host with accelerated CDN links.",
   "main": "main.js",
   "type": "module",
@@ -18,7 +18,7 @@
     "github",
     "cdn"
   ],
-  "author": "曾胤岑",
+  "author": "zengyincen",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^22.10.0",
