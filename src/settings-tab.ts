@@ -1,10 +1,5 @@
-import { Notice, PluginSettingTab, requestUrl } from "obsidian";
-import type {
-  App,
-  Setting,
-  SettingDefinitionItem,
-  SettingDefinitionRender,
-} from "obsidian";
+import { Notice, PluginSettingTab, requestUrl, Setting } from "obsidian";
+import type { App } from "obsidian";
 import brandIconDataUrl from "../assets/icon.svg";
 import type PastepicPlugin from "./main";
 import { isAppLanguage, LANGUAGE_OPTIONS, t } from "./i18n";
@@ -18,46 +13,35 @@ export class PastepicSettingTab extends PluginSettingTab {
     this.icon = "image-up";
   }
 
-  override getSettingDefinitions(): SettingDefinitionItem[] {
-    return [
-      this.headerDefinition(),
-      {
-        type: "group",
-        items: this.generalDefinitions(),
-      },
+  override display(): void {
+    const { containerEl } = this;
+    containerEl.empty();
+    this.renderHeader(containerEl);
+    this.renderRows(containerEl, this.generalDefinitions());
+    new Setting(containerEl)
+      .setName(this.tr(this.plugin.settings.provider === "github" ? "githubHeading" : "customHeading"))
+      .setHeading();
+    this.renderRows(
+      containerEl,
       this.plugin.settings.provider === "github"
-        ? {
-            type: "group",
-            heading: this.tr("githubHeading"),
-            items: this.githubDefinitions(),
-          }
-        : {
-            type: "group",
-            heading: this.tr("customHeading"),
-            items: this.customApiDefinitions(),
-          },
-    ];
+        ? this.githubDefinitions()
+        : this.customApiDefinitions(),
+    );
   }
 
-  private headerDefinition(): SettingDefinitionRender {
-    return {
-      name: "Pastepic",
-      searchable: false,
-      render: (setting) => {
-        setting.setName("Pastepic").setHeading();
-        setting.settingEl.addClass("obsipastepic-settings-header");
-        const image = setting.settingEl.createEl("img", {
-          attr: {
-            src: brandIconDataUrl,
-            alt: "Pastepic",
-          },
-        });
-        setting.settingEl.prepend(image);
+  private renderHeader(containerEl: HTMLElement): void {
+    const setting = new Setting(containerEl).setName("Pastepic").setHeading();
+    setting.settingEl.addClass("obsipastepic-settings-header");
+    const image = setting.settingEl.createEl("img", {
+      attr: {
+        src: brandIconDataUrl,
+        alt: "Pastepic",
       },
-    };
+    });
+    setting.settingEl.prepend(image);
   }
 
-  private generalDefinitions(): SettingDefinitionRender[] {
+  private generalDefinitions(): SettingRow[] {
     return [
       this.row(this.tr("language"), this.tr("languageDesc"), (setting) => {
         setting.addDropdown((dropdown) => {
@@ -68,7 +52,7 @@ export class PastepicSettingTab extends PluginSettingTab {
             if (!isAppLanguage(value)) return;
             this.plugin.settings.language = value;
             await this.plugin.saveSettings();
-            this.update();
+            this.display();
           });
         });
       }),
@@ -128,14 +112,14 @@ export class PastepicSettingTab extends PluginSettingTab {
             .onChange(async (value) => {
               this.plugin.settings.provider = value === "custom" ? "custom" : "github";
               await this.plugin.saveSettings();
-              this.update();
+              this.display();
             }),
         );
       }),
     ];
   }
 
-  private githubDefinitions(): SettingDefinitionRender[] {
+  private githubDefinitions(): SettingRow[] {
     const settings = this.plugin.settings.github;
     return [
       this.row(this.tr("owner"), this.tr("ownerDesc"), (setting) => {
@@ -230,7 +214,7 @@ export class PastepicSettingTab extends PluginSettingTab {
             button.setButtonText(this.tr("useRaw")).onClick(async () => {
               settings.cdnBaseUrl = "";
               await this.plugin.saveSettings();
-              this.update();
+              this.display();
             }),
           );
         updatePreview();
@@ -268,7 +252,7 @@ export class PastepicSettingTab extends PluginSettingTab {
     ];
   }
 
-  private customApiDefinitions(): SettingDefinitionRender[] {
+  private customApiDefinitions(): SettingRow[] {
     const settings = this.plugin.settings.custom;
     return [
       this.row(this.tr("endpoint"), this.tr("endpointDesc"), (setting) => {
@@ -346,16 +330,20 @@ export class PastepicSettingTab extends PluginSettingTab {
     name: string,
     desc: string | undefined,
     configure: (setting: Setting) => void,
-  ): SettingDefinitionRender {
+  ): SettingRow {
     return {
       name,
       desc,
-      render: (setting) => {
-        setting.setName(name);
-        if (desc) setting.setDesc(desc);
-        configure(setting);
-      },
+      configure,
     };
+  }
+
+  private renderRows(containerEl: HTMLElement, rows: SettingRow[]): void {
+    for (const row of rows) {
+      const setting = new Setting(containerEl).setName(row.name);
+      if (row.desc) setting.setDesc(row.desc);
+      row.configure(setting);
+    }
   }
 
   private tr(key: MessageKey, variables?: Record<string, string | number>): string {
@@ -365,4 +353,10 @@ export class PastepicSettingTab extends PluginSettingTab {
   private errorMessage(error: unknown): string {
     return error instanceof Error ? error.message : String(error);
   }
+}
+
+interface SettingRow {
+  name: string;
+  desc?: string;
+  configure: (setting: Setting) => void;
 }

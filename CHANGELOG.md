@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.10 — 2026-07-26
+
+- Restore support for the current stable Obsidian releases: mobile 1.12.4 and desktop 1.12.7.
+- Replace the Obsidian 1.13-only declarative settings implementation with the compatible imperative settings API.
+- Compile against Obsidian 1.12.3 API types to prevent accidental use of 1.13-only APIs.
+
 ## 0.4.9 — 2026-07-26
 
 - Improve mobile Obsidian paste support by reading image files from clipboard items when `clipboard.files` is empty.

@@ -1,6 +1,6 @@
 {
   "name": "obsipastepic",
-  "version": "0.4.9",
+  "version": "0.4.10",
   "description": "Pastepic uploads pasted images from Obsidian to GitHub or a custom image host and inserts accelerated CDN links.",
   "main": "main.js",
   "type": "module",
@@ -21,7 +21,7 @@
   "devDependencies": {
     "@types/node": "^22.10.0",
     "esbuild": "^0.28.1",
-    "obsidian": "^1.13.1",
+    "obsidian": "1.12.3",
     "typescript": "^5.7.3",
     "vitest": "^3.0.4"
   }
