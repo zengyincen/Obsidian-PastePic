@@ -1,6 +1,9 @@
 import type { PastepicSettings } from "./types";
 import { isAppLanguage } from "./i18n";
 
+export const DEFAULT_COMMIT_MESSAGE = "Upload from Pastepic";
+const LEGACY_DEFAULT_COMMIT_MESSAGE = "Upload {filename} from Obsidian";
+
 export const DEFAULT_SETTINGS: PastepicSettings = {
   language: "zh-CN",
   provider: "github",
@@ -15,7 +18,7 @@ export const DEFAULT_SETTINGS: PastepicSettings = {
     branch: "main",
     token: "",
     uploadPath: "",
-    commitMessage: "Upload {filename} from Obsidian",
+    commitMessage: DEFAULT_COMMIT_MESSAGE,
     filenameStrategy: "timestamp-original",
     cdnBaseUrl: "",
   },
@@ -53,6 +56,12 @@ export function mergeSettings(
   }
   if (!custom.cdnBaseUrl && legacyCustomCdn && !legacyCustomCdn.includes("{")) {
     custom.cdnBaseUrl = legacyCustomCdn;
+  }
+  if (
+    !github.commitMessage.trim()
+    || github.commitMessage === LEGACY_DEFAULT_COMMIT_MESSAGE
+  ) {
+    github.commitMessage = DEFAULT_COMMIT_MESSAGE;
   }
 
   return {

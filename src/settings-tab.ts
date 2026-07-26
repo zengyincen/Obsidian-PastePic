@@ -1,6 +1,7 @@
 import { Notice, PluginSettingTab, requestUrl, Setting } from "obsidian";
 import type { App } from "obsidian";
 import type PastepicPlugin from "./main";
+import { DEFAULT_COMMIT_MESSAGE } from "./settings";
 import { isAppLanguage, LANGUAGE_OPTIONS, t } from "./i18n";
 import type { MessageKey } from "./i18n";
 import { githubHeaders, buildGitHubPublicUrl, validateGitHubSettings } from "./uploaders/github";
@@ -196,7 +197,7 @@ export class PastepicSettingTab extends PluginSettingTab {
       this.row(this.tr("commitMessage"), this.tr("commitMessageDesc"), (setting) => {
         setting.addText((text) =>
           text.setValue(settings.commitMessage).onChange(async (value) => {
-            settings.commitMessage = value || "Upload {filename} from Obsidian";
+            settings.commitMessage = value || DEFAULT_COMMIT_MESSAGE;
             await this.plugin.saveSettings();
           }),
         );

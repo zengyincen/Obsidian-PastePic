@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.12 — 2026-07-26
+
+- Change the default GitHub commit message to `Upload from Pastepic`.
+- Migrate the previous `Upload {filename} from Obsidian` default while preserving custom commit messages.
+
 ## 0.4.11 — 2026-07-26
 
 - Remove the redundant plugin-name heading from the settings page.

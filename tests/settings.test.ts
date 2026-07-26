@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { DEFAULT_SETTINGS, mergeSettings } from "../src/settings";
+import { DEFAULT_COMMIT_MESSAGE, DEFAULT_SETTINGS, mergeSettings } from "../src/settings";
 import type { PastepicSettings } from "../src/types";
 
 describe("settings migration", () => {
@@ -31,6 +31,22 @@ describe("settings migration", () => {
     const merged = mergeSettings(undefined);
     merged.github.owner = "changed";
     expect(DEFAULT_SETTINGS.github.owner).toBe("");
+  });
+
+  it("uses the Pastepic commit message and migrates the legacy default", () => {
+    expect(DEFAULT_SETTINGS.github.commitMessage).toBe("Upload from Pastepic");
+    expect(mergeSettings({
+      github: {
+        ...DEFAULT_SETTINGS.github,
+        commitMessage: "Upload {filename} from Obsidian",
+      },
+    }).github.commitMessage).toBe(DEFAULT_COMMIT_MESSAGE);
+    expect(mergeSettings({
+      github: {
+        ...DEFAULT_SETTINGS.github,
+        commitMessage: "Store {filename}",
+      },
+    }).github.commitMessage).toBe("Store {filename}");
   });
 
   it("drops legacy brace-based CDN templates", () => {
