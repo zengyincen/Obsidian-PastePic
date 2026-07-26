@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.15 — 2026-07-26
+
+- Put Obsidian Community Plugins first in both installation guides and move manual Release installation below it.
+- Add a 36-second real Obsidian desktop upload demo in MP4 and README-friendly GIF formats.
+- Reduce first-time GitHub setup to three required fields with direct repository/token links, clear defaults, and one-click jsDelivr configuration.
+- Separate real desktop footage from tablet/phone compatibility evidence and document the tested mobile clipboard fallback honestly.
+- Keep the new multi-button settings rows usable on narrow mobile screens.
+
 ## 0.4.14 — 2026-07-26
 
 - Standardize the author name as `zengyincen` in Obsidian metadata and project attribution.

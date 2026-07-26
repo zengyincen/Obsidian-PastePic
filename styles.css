@@ -37,3 +37,22 @@
   color: var(--text-warning);
   font-size: var(--font-ui-smaller);
 }
+
+.obsipastepic-quick-setup .setting-item-control,
+.obsipastepic-cdn-setting .setting-item-control {
+  flex-wrap: wrap;
+  gap: var(--size-4-2);
+}
+
+@media (max-width: 600px) {
+  .obsipastepic-quick-setup,
+  .obsipastepic-cdn-setting {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .obsipastepic-quick-setup .setting-item-control,
+  .obsipastepic-cdn-setting .setting-item-control {
+    justify-content: flex-start;
+  }
+}

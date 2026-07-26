@@ -21,9 +21,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/zengyincen/Obsidian-PastePic/releases/latest"><strong>下载最新版本</strong></a>
+  <a href="obsidian://show-plugin?id=obsipastepic"><strong>在 Obsidian 中安装</strong></a>
   ·
-  <a href="#30-秒配置-github"><strong>快速开始</strong></a>
+  <a href="#3-分钟配置-github"><strong>3 分钟配置</strong></a>
   ·
   <a href="#cdn--代理基础路径"><strong>CDN 路径</strong></a>
 </p>
@@ -31,6 +31,16 @@
 <p align="center">
   <img src="./assets/banner.svg" alt="Pastepic Banner" width="100%" />
 </p>
+
+## 36 秒真实演示
+
+<p align="center">
+  <a href="./assets/pastepic-demo.mp4"><img src="./assets/pastepic-demo.gif" alt="Pastepic 在 Obsidian 中真实上传图片的演示" width="100%" /></a>
+</p>
+
+只粘贴一次，Pastepic 就会上传图片、把占位内容替换成标准远程 Markdown 图片链接；失败时仍会保留可用的本地图片。上方桌面片段来自 **Obsidian 1.12.7 的真实操作录制**，使用的就是插件正式工作流。[观看更清晰的 1080p MP4](./assets/pastepic-demo.mp4)。
+
+视频中的平板和手机画面用于说明已验证的兼容路径，并非伪装成实机录屏的模拟画面。移动端支持证据包括：与桌面共用的浏览器安全上传代码、`clipboardData.items` 回退测试、`isDesktopOnly: false`，以及 Obsidian 1.12.4 最低版本声明。后续可在不混淆证据的前提下单独补充真实设备短片。
 
 ## 为什么是 Pastepic？
 
@@ -61,7 +71,17 @@ Pastepic 只做一件事：**接住你粘贴、拖入或由 Obsidian 新插入�
 
 ## 安装
 
-### 从 Release 安装
+### 从 Obsidian 社区插件市场安装——推荐
+
+1. 在 Obsidian 中打开「**设置 → 第三方插件**」。
+2. 点击「**浏览**」，搜索 **Pastepic** 并打开插件详情。
+3. 点击「**安装**」，然后「**启用**」。
+
+也可以直接打开插件页：**[在 Obsidian 中安装 Pastepic](obsidian://show-plugin?id=obsipastepic)**。
+
+> Pastepic 已进入 [Obsidian 官方插件目录](https://obsidian.md/plugins?id=obsipastepic)。0.4.15 支持 Obsidian 移动端 1.12.4、桌面端 1.12.7 及以上版本。
+
+### 从 Release 手动安装
 
 1. 打开 [Latest Release](https://github.com/zengyincen/Obsidian-PastePic/releases/latest)。
 2. 下载 `main.js`、`manifest.json` 和 `styles.css`。
@@ -73,8 +93,6 @@ Pastepic 只做一件事：**接住你粘贴、拖入或由 Obsidian 新插入�
 
 4. 把下载的三个文件放入该目录。彩色图标已经内嵌在 `main.js` 中，不需要额外素材文件。
 5. 重启 Obsidian，在「设置 → 第三方插件」中启用 **Pastepic**。
-
-> Pastepic 已上架 [Obsidian 官方社区插件目录](https://community.obsidian.md/plugins/obsipastepic)。0.4.14 支持当前正式版：Obsidian 移动端 1.12.4、桌面端 1.12.7 及以上版本。
 
 > 对外显示名称统一为 **Pastepic**。插件 ID 和安装目录继续使用 `obsipastepic`，以保持现有安装与设置兼容。
 
@@ -88,16 +106,25 @@ npm test
 npm run build
 ```
 
-## 30 秒配置 GitHub
+## 3 分钟配置 GitHub
 
-1. 创建或选择一个用于存图的 GitHub 仓库。公开仓库更适合直接配合公共 CDN。
-2. 创建 **Fine-grained personal access token**：
+Pastepic 设置页现在只把 3 个值列为必填：仓库所有者、仓库名、Token。分支默认 `main`，仓库内路径和 CDN 都可以留空。
+
+1. 在设置页点击「**创建图片仓库**」，或选择已有公开仓库。
+2. 点击「**创建最小权限 Token**」，创建 **Fine-grained personal access token**：
    - Repository access：只选择图床仓库；
    - Repository permissions → Contents：选择 **Read and write**；
    - 不授予无关权限。
-3. 打开 Pastepic 设置，选择「GitHub 仓库」。
-4. 填写仓库所有者、仓库名、分支和 Token。
-5. 点击「测试 GitHub 配置」，再粘贴一张图片。
+3. 只填写「**仓库所有者**」「**仓库名**」「**GitHub Token**」。
+4. 点击「**测试 GitHub 配置**」，然后粘贴一张图片。
+
+| 现在必须填写 | 插件已经替你处理 |
+| --- | --- |
+| GitHub 用户名/组织名 | 分支默认 `main` |
+| 图片仓库名 | 仓库内路径默认留空/根目录 |
+| Fine-grained Token | CDN 留空时自动使用 GitHub Raw |
+
+只有需要其他分支、固定目录、自定义文件名或 CDN 加速时，才展开理解「**高级选项（可先跳过）**」。点击「**一键使用 jsDelivr**」会根据当前用户名、仓库、分支和路径自动生成 CDN 基础路径。
 
 ### 路径与文件名
 
@@ -105,9 +132,17 @@ npm run build
 
 设置页语言默认为简体中文，可随时切换为英语、日语、韩语、意大利语、西班牙语、德语或法语。
 
-### 移动端支持
+### 全平台支持与证据
 
 Pastepic 支持电脑、平板和手机上的 Obsidian，包括 iOS 与 Android。直接从系统剪贴板粘贴图片即可上传到已配置的 GitHub 仓库或图床；即使移动端 WebView 没有提供 `clipboard.files`，而是通过剪贴板项目提供图片，也可以正常处理。移动系统通常不提供与桌面相同的拖放交互，因此平板和手机版建议使用粘贴或先将图片插入笔记；拖放设置仍会保留给支持拖放事件的平台。
+
+| 平台 | 支持的工作流 | 当前证据 |
+| --- | --- | --- |
+| 电脑 | 粘贴、拖入、插入本地图片 | 上方演示中的 Obsidian 1.12.7 真实操作录制 |
+| 平板 | 粘贴、插入本地图片；系统支持时可拖放 | 浏览器安全运行时 + 移动端剪贴板项目回退测试 |
+| 手机 | 粘贴、插入本地图片 | 浏览器安全运行时 + 移动端剪贴板项目回退测试 |
+
+Pastepic 不使用 Electron 或 Node 运行时 API，并声明 `isDesktopOnly: false`。测试覆盖移动 WebView 只通过 `DataTransfer.items` 暴露粘贴图片的情况。不同系统和来源应用的剪贴板行为仍可能不同；提交[移动端兼容性反馈](https://github.com/zengyincen/Obsidian-PastePic/issues/new)时，请附上设备、系统版本、Obsidian 版本和图片来源应用。
 
 文件命名支持：
 

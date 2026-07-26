@@ -1,6 +1,6 @@
 {
   "name": "obsipastepic",
-  "version": "0.4.14",
+  "version": "0.4.15",
   "description": "Pastepic uploads images from desktop, tablet, and mobile Obsidian to GitHub or a custom image host with accelerated CDN links.",
   "main": "main.js",
   "type": "module",

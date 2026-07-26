@@ -1,7 +1,7 @@
 {
   "id": "obsipastepic",
   "name": "Pastepic",
-  "version": "0.4.14",
+  "version": "0.4.15",
   "minAppVersion": "1.12.4",
   "description": "Upload pasted images on desktop, tablet, and mobile to GitHub or your image host with customizable CDN links.",
   "author": "zengyincen",
