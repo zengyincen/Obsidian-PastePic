@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <a href="obsidian://show-plugin?id=obsipastepic"><strong>Install in Obsidian</strong></a>
+  <a href="https://community.obsidian.md/plugins/obsipastepic"><strong>Install in Obsidian</strong></a>
   ·
   <a href="#three-minute-github-setup"><strong>3-minute setup</strong></a>
   ·
