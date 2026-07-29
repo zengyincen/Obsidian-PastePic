@@ -23,7 +23,7 @@
   ·
   <a href="#cdn--proxy-base-directory"><strong>CDN path</strong></a>
   ·
-  <a href="./README_ZH.md">简体中文</a>
+  <a href="./README_ZH.md"><strong>简体中文</strong></a>
   ·
   <strong>English</strong>
 </p>
